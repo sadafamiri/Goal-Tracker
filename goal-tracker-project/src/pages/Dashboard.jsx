@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom"; 
 import GoalCard from "../components/GoalCard";
-import { DataGoal } from "../Data/DataGoal";
+import { GoalsContext } from "../context/GoalsContext";
 
 export default function Dashboard() {
   const navigate = useNavigate(); 
+  const { goals } = useContext(GoalsContext);
 
   return (
     <div>
@@ -17,7 +18,7 @@ export default function Dashboard() {
         + New Goal
       </button>
 
-      {DataGoal.map((goal) => (
+      {goals.map((goal) => (
         <GoalCard
           key={goal.id}
           title={goal.title}

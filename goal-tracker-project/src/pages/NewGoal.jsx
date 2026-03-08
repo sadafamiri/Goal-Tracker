@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-// import { GoalsContext } from "../context/GoalsContext";
+import { GoalsContext } from "../context/GoalsContext";
 import { useNavigate } from "react-router-dom";
 
 export default function NewGoal() {
@@ -30,7 +30,7 @@ export default function NewGoal() {
     const newGoalsArray = [...goals, newGoal];
     updateGoals(newGoalsArray); // اضافه کردن به Context و LocalStorage
 
-    navigate("/dashboard"); // بازگشت به داشبورد
+    navigate("/"); // بازگشت به داشبورد
   };
 
   return (

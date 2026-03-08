@@ -8,27 +8,27 @@ import Goals from './pages/Goals'
 import NewGoal from './pages/NewGoal'
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
+import { GoalsProvider } from './context/GoalsContext'
 
 function App() {
 
 
   return (
-    <div>
-      
-
-<Routes>
-      
-      <Route element={<Layout />}>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/goals" element={<Goals />} />
-        <Route path="/goals/new" element={<NewGoal />} />
-        <Route path="/goals/:id" element={<GoalDetails />} />
-        <Route path="/categories" element={<Categories />} />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="*" element={<NotFound />} />
-      </Route>
-    </Routes>
-    </div>
+    <GoalsProvider>
+      <div>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/goals" element={<Goals />} />
+            <Route path="/goals/new" element={<NewGoal />} />
+            <Route path="/goals/:id" element={<GoalDetails />} />
+            <Route path="/categories" element={<Categories />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+      </div>
+    </GoalsProvider>
   )
 }
 
