@@ -1,6 +1,6 @@
 import Layout from './pages/Layout'
 import Dashboard from './pages/Dashboard'
-import Categories from "./pages/Categories";
+import Categories from "./pages/Categories"
 import GoalDetails from './pages/GoalDetails'
 import Settings from './pages/Settings'
 import NotFound from './pages/NotFound'

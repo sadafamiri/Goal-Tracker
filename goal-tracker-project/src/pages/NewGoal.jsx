@@ -14,7 +14,6 @@ export default function NewGoal() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    
     const newGoal = {
       id: Date.now(),
       title,
@@ -28,9 +27,9 @@ export default function NewGoal() {
     };
 
     const newGoalsArray = [...goals, newGoal];
-    updateGoals(newGoalsArray); // اضافه کردن به Context و LocalStorage
+    updateGoals(newGoalsArray);
 
-    navigate("/"); // بازگشت به داشبورد
+    navigate("/");
   };
 
   return (
@@ -39,12 +38,19 @@ export default function NewGoal() {
       <form onSubmit={handleSubmit}>
         <div>
           <label>Title:</label>
-          <input value={title} onChange={(e) => setTitle(e.target.value)} required />
+          <input
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
         </div>
 
         <div>
           <label>Category:</label>
-          <select value={category} onChange={(e) => setCategory(e.target.value)}>
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          >
             <option value="Study">Study</option>
             <option value="Work">Work</option>
             <option value="Health">Health</option>

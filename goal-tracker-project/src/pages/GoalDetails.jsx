@@ -3,11 +3,11 @@ import { useParams, useNavigate } from "react-router-dom";
 import { GoalsContext } from "../context/GoalsContext";
 
 export default function GoalDetails() {
-  const { id } = useParams(); // گرفتن id از URL
+  const { id } = useParams(); 
   const navigate = useNavigate();
   const { goals, addProgress, deleteGoal } = useContext(GoalsContext);
 
-  // پیدا کردن Goal با id
+  
   const goal = goals.find((g) => g.id === Number(id));
   if (!goal) return <h2>Goal not found!</h2>;
 
@@ -20,7 +20,7 @@ export default function GoalDetails() {
       <p>Type: {goal.type}</p>
       <p>Progress: {goal.progress} / {goal.target} ({progressPercent}%)</p>
 
-      {/* Progress Bar */}
+      /* Progress Bar */
       <div style={{
         width: "300px",
         height: "20px",
@@ -48,6 +48,21 @@ export default function GoalDetails() {
       <button onClick={() => navigate(-1)} style={{ marginLeft: "10px" }}>
         Back
       </button>
+
+
+      <h3>Activity History</h3>
+
+{goal.logs && goal.logs.length === 0 && (
+  <p>No activity yet</p>
+)}
+
+<ul>
+  {goal.logs && goal.logs.map((log, index) => (
+    <li key={index}>
+      +{log.amount} on {new Date(log.date).toLocaleDateString()}
+    </li>
+  ))}
+</ul>
     </div>
   );
 }

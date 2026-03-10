@@ -1,11 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import '../styles/goalcard.css'
-export default function GoalCard({ title, progress, target, category, onDelete,
-  onAddProgress}) {
+export default function GoalCard({ id,title, progress, target, category, onDelete,onAddProgress}) {
     console.log(title, category, progress, target);
   const progressPercent = Math.round((progress / target) * 100);
+  const navigate = useNavigate();
   return (
-    <div className="goal-card">
+    <div className="goal-card"
+       onClick={() => navigate(`/goals/${id}`)}>
       <h3 className="goal-title">{title}</h3>
       <p className="goal-category">Category: {category}</p>
       <div className="progress-container">
