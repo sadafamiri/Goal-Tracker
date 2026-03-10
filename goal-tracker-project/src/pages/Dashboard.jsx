@@ -1,22 +1,18 @@
-import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom"; 
-import GoalCard from "../components/GoalCard";
+import { useContext } from "react";
 import { GoalsContext } from "../context/GoalsContext";
+import GoalCard from "../components/GoalCard";
+import { useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
-  const navigate = useNavigate(); 
-  const { goals } = useContext(GoalsContext);
+
+  const { goals, deleteGoal, addProgress } = useContext(GoalsContext);
+  const navigate = useNavigate();
 
   return (
     <div>
       <h1>Dashboard</h1>
 
-
-      <button
-        onClick={() => navigate("/goals/new")} 
-      >
-        + New Goal
-      </button>
+      <button onClick={() => navigate("/goals/new")} > + New Goal </button>
 
       {goals.map((goal) => (
         <GoalCard
@@ -25,6 +21,8 @@ export default function Dashboard() {
           progress={goal.progress}
           target={goal.target}
           category={goal.category}
+          onDelete={() => deleteGoal(goal.id)}
+          onAddProgress={() => addProgress(goal.id)}
         />
       ))}
     </div>

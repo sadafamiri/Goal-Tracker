@@ -19,11 +19,43 @@ export function GoalsProvider({ children }) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(goals));
   }, [goals]);
 
+  const deleteGoal = (id) => {
+    const newGoals = goals.filter((goal) => goal.id !== id);
+    setGoals(newGoals);
+  };
+
+  const addProgress = (id) => {
+  const newGoals = goals.map((goal) => {
+    if (goal.id === id) {
+      const newProgress = goal.progress + 1;
+
+      return {
+        ...goal,
+        progress: newProgress > goal.target ? goal.target : newProgress,
+      };
+    }
+
+    return goal;
+  });
+
+  setGoals(newGoals);
+};
+
   const updateGoals = (nextGoals) => {
     setGoals(nextGoals);
   };
 
-  const value = useMemo(() => ({ goals, updateGoals }), [goals]);
+  const value = useMemo(
+    () => ({
+      goals,
+      updateGoals,
+      deleteGoal,
+      addProgress,
+    }),
+    [goals],
+  );
 
-  return <GoalsContext.Provider value={value}>{children}</GoalsContext.Provider>;
+  return (
+    <GoalsContext.Provider value={value}>{children}</GoalsContext.Provider>
+  );
 }

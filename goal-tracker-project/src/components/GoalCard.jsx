@@ -1,6 +1,7 @@
 import React from "react";
 import '../styles/goalcard.css'
-export default function GoalCard({ title, progress, target, category }) {
+export default function GoalCard({ title, progress, target, category, onDelete,
+  onAddProgress}) {
     console.log(title, category, progress, target);
   const progressPercent = Math.round((progress / target) * 100);
   return (
@@ -16,6 +17,9 @@ export default function GoalCard({ title, progress, target, category }) {
       <p className="progress-text">
         Progress: {progress} / {target} ({progressPercent}%)
       </p>
+      <button onClick={onAddProgress}>+ Progress</button>
+
+      <button onClick={onDelete}>Delete</button>
     </div>
   );
 }
