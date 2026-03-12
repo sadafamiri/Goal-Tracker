@@ -20,7 +20,7 @@ export default function GoalDetails() {
       <p>Type: {goal.type}</p>
       <p>Progress: {goal.progress} / {goal.target} ({progressPercent}%)</p>
 
-      /* Progress Bar */
+      { /* Progress Bar */ }
       <div style={{
         width: "300px",
         height: "20px",
