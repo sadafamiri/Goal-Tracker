@@ -3,6 +3,19 @@ import { GoalsContext } from "../context/GoalsContext";
 import GoalCard from "../components/GoalCard";
 import { useNavigate } from "react-router-dom";
 
+// MUI
+import {
+  Box,
+  Typography,
+  Grid,
+  Button,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Stack
+} from "@mui/material";
+
 export default function Goals() {
 
   const { goals, deleteGoal, addProgress } = useContext(GoalsContext);
@@ -16,45 +29,69 @@ export default function Goals() {
       : goals.filter((goal) => goal.category === filter);
 
   return (
-    <div>
+    <Box sx={{ p: 4 }}>
 
-      <h1>All Goals</h1>
+      <Typography variant="h3" mb={3}>
+        All Goals
+      </Typography>
 
-      {/* filter */}
-      <label>Filter by Category: </label>
-
-      <select
-        value={filter}
-        onChange={(e) => setFilter(e.target.value)}
+      {/* Filter + Button */}
+      <Stack
+        direction="row"
+        spacing={3}
+        mb={4}
+        alignItems="center"
       >
-        <option value="All">All</option>
-        <option value="Study">Study</option>
-        <option value="Work">Work</option>
-        <option value="Health">Health</option>
-        <option value="Personal">Personal</option>
-      </select>
 
-      <br /><br />
+        <FormControl sx={{ minWidth: 200 }}>
+          <InputLabel>Category</InputLabel>
 
-      <button onClick={() => navigate("/goals/new")}>
-        + Create New Goal
-      </button>
+          <Select
+            value={filter}
+            label="Category"
+            onChange={(e) => setFilter(e.target.value)}
+          >
+            <MenuItem value="All">All</MenuItem>
+            <MenuItem value="Study">Study</MenuItem>
+            <MenuItem value="Work">Work</MenuItem>
+            <MenuItem value="Health">Health</MenuItem>
+            <MenuItem value="Personal">Personal</MenuItem>
+          </Select>
+        </FormControl>
 
-      <br /><br />
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => navigate("/goals/new")}
+        >
+          + Create New Goal
+        </Button>
 
-      {filteredGoals.map((goal) => (
-        <GoalCard
-          key={goal.id}
-          id={goal.id}
-          title={goal.title}
-          progress={goal.progress}
-          target={goal.target}
-          category={goal.category}
-          onDelete={() => deleteGoal(goal.id)}
-          onAddProgress={() => addProgress(goal.id)}
-        />
-      ))}
+      </Stack>
 
-    </div>
+      {/* Goals List */}
+      <Grid container spacing={3}>
+
+        {filteredGoals.map((goal) => (
+
+          <Grid item xs={12} sm={6} md={4} key={goal.id}>
+
+            <GoalCard
+              id={goal.id}
+              title={goal.title}
+              progress={goal.progress}
+              target={goal.target}
+              category={goal.category}
+              onDelete={() => deleteGoal(goal.id)}
+              onAddProgress={() => addProgress(goal.id)}
+            />
+
+          </Grid>
+
+        ))}
+
+      </Grid>
+
+    </Box>
   );
 }

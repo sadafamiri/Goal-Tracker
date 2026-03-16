@@ -1,6 +1,16 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/goalcard.css";
+
+// MUI
+import {
+  Card,
+  CardContent,
+  Typography,
+  Button,
+  LinearProgress,
+  Stack
+} from "@mui/material";
+
 export default function GoalCard({
   id,
   title,
@@ -8,40 +18,86 @@ export default function GoalCard({
   target,
   category,
   onDelete,
-  onAddProgress,
+  onAddProgress
 }) {
-  console.log(title, category, progress, target);
-  const progressPercent = Math.round((progress / target) * 100);
+
   const navigate = useNavigate();
+
+  const percent = Math.round((progress / target) * 100);
+
   return (
-    <div>
-      <h3 className="goal-title">{title}</h3>
-      <p className="goal-category">Category: {category}</p>
-      <div className="progress-container">
-        <div
-          className="progress-fill"
-          style={{ width: `${progressPercent}%` }}
-        ></div>
-      </div>
-      <p className="progress-text">
-        Progress: {progress} / {target} ({progressPercent}%)
-      </p>
-      <button onClick={() => navigate(`/goals/${id}`)}>View Details</button>
-      <button onClick={onAddProgress}>+ Progress</button>
+    <Card
+      sx={{
+        borderRadius: 3,
+        transition: "0.3s",
+        "&:hover": {
+          transform: "scale(1.03)"
+        }
+      }}
+      elevation={4}
+    >
 
-      <button
-        onClick={() => {
-          const confirmDelete = window.confirm(
-            "Are you sure you want to delete this goal?",
-          );
+      <CardContent>
 
-          if (confirmDelete) {
-            onDelete();
-          }
-        }}
-      >
-        Delete
-      </button>
-    </div>
+        <Typography variant="h6" mb={1}>
+          {title}
+        </Typography>
+
+        <Typography color="text.secondary" mb={2}>
+          {category}
+        </Typography>
+
+        <Typography variant="body2" mb={1}>
+          {progress} / {target} ({percent}%)
+        </Typography>
+
+        <LinearProgress
+          variant="determinate"
+          value={percent}
+          sx={{ height: 8, borderRadius: 5, mb: 2 }}
+        />
+
+        <Stack direction="row" spacing={1}>
+
+          <Button
+            variant="contained"
+            size="small"
+            color="success"
+            onClick={(e) => {
+              e.stopPropagation();
+              onAddProgress();
+            }}
+          >
+            + Progress
+          </Button>
+
+          <Button
+            variant="outlined"
+            size="small"
+            onClick={(e) => {
+              e.stopPropagation();
+              navigate(`/goals/${id}`);
+            }}
+          >
+            View
+          </Button>
+
+          <Button
+            variant="contained"
+            size="small"
+            color="error"
+            onClick={(e) => {
+              e.stopPropagation();
+              onDelete();
+            }}
+          >
+            Delete
+          </Button>
+
+        </Stack>
+
+      </CardContent>
+
+    </Card>
   );
 }
