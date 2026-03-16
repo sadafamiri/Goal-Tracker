@@ -13,7 +13,7 @@ export default function Navbar() {
 
           <NavLink className={linkClass} to="/Goals">Goals</NavLink>
           <NavLink className={linkClass} to="/Categories">Categories</NavLink>
-          <NavLink className={linkClass} to="/Setting">Setting</NavLink>
+          <NavLink className={linkClass} to="/Settings">Settings</NavLink>
         </div>
       </div>
     </nav>
