@@ -7,8 +7,6 @@ import NotFound from "./pages/NotFound";
 import Goals from "./pages/Goals";
 import NewGoal from "./pages/NewGoal";
 
-import "./App.css";
-
 import { Route, Routes } from "react-router-dom";
 
 import { GoalsProvider } from "./context/GoalsContext";
