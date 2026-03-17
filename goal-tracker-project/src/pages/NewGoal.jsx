@@ -1,6 +1,16 @@
 import React, { useState, useContext } from "react";
 import { GoalsContext } from "../context/GoalsContext";
 import { useNavigate } from "react-router-dom";
+import {
+  Box,
+  Typography,
+  TextField,
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
+  Button,
+} from "@mui/material";
 
 export default function NewGoal() {
   const { goals, updateGoals } = useContext(GoalsContext);
@@ -33,53 +43,79 @@ export default function NewGoal() {
   };
 
   return (
-    <div>
-      <h1>Create New Goal</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Title:</label>
-          <input
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
-        </div>
+    <Box
+      sx={{
+        maxWidth: 500,
+        mx: "auto",
+        mt: 5,
+        p: 3,
+        borderRadius: 2,
+        boxShadow: 3,
+        bgcolor: "background.paper",
+      }}
+    >
+      <Typography variant="h4" mb={3}>
+        Create New Goal
+      </Typography>
 
-        <div>
-          <label>Category:</label>
-          <select
+      <form onSubmit={handleSubmit}>
+        <TextField
+          label="Title"
+          fullWidth
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+          margin="normal"
+        />
+
+        <FormControl fullWidth margin="normal">
+          <InputLabel>Category</InputLabel>
+          <Select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
+            label="Category"
           >
-            <option value="Study">Study</option>
-            <option value="Work">Work</option>
-            <option value="Health">Health</option>
-            <option value="Personal">Personal</option>
-          </select>
-        </div>
+            <MenuItem value="Study">Study</MenuItem>
+            <MenuItem value="Work">Work</MenuItem>
+            <MenuItem value="Health">Health</MenuItem>
+            <MenuItem value="Personal">Personal</MenuItem>
+          </Select>
+        </FormControl>
 
-        <div>
-          <label>Type:</label>
-          <select value={type} onChange={(e) => setType(e.target.value)}>
-            <option value="daily">Daily</option>
-            <option value="count">Count-based</option>
-            <option value="time">Time-based</option>
-          </select>
-        </div>
+        <FormControl fullWidth margin="normal">
+          <InputLabel>Type</InputLabel>
+          <Select
+            value={type}
+            onChange={(e) => setType(e.target.value)}
+            label="Type"
+          >
+            <MenuItem value="daily">Daily</MenuItem>
+            <MenuItem value="count">Count-based</MenuItem>
+            <MenuItem value="time">Time-based</MenuItem>
+          </Select>
+        </FormControl>
 
-        <div>
-          <label>Target:</label>
-          <input
-            type="number"
-            value={target}
-            onChange={(e) => setTarget(e.target.value)}
-            min={1}
-            required
-          />
-        </div>
+        <TextField
+          label="Target"
+          type="number"
+          fullWidth
+          value={target}
+          onChange={(e) => setTarget(e.target.value)}
+          inputProps={{ min: 1 }}
+          required
+          margin="normal"
+        />
 
-        <button type="submit">Create Goal</button>
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          sx={{ mt: 3 }}
+          fullWidth
+        >
+          Create Goal
+        </Button>
       </form>
-    </div>
+    </Box>
   );
 }
