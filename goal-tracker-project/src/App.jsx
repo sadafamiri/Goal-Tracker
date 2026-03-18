@@ -12,11 +12,11 @@ import { Route, Routes } from "react-router-dom";
 import { GoalsProvider } from "./context/GoalsContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import { LanguageProvider } from "./context/LanguageContext";
-import theme from "./theme/Theme";
+import Theme from "./theme/Theme";
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={Theme}>
       <LanguageProvider>
         <GoalsProvider>
           <Routes>

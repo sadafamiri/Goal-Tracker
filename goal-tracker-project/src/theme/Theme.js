@@ -25,3 +25,5 @@ export const darkTheme = createTheme({
     fontFamily: "Arial, sans-serif",
   },
 });
+
+export default Theme
