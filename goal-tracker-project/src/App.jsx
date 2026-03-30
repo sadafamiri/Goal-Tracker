@@ -12,6 +12,7 @@ import { Route, Routes } from "react-router-dom";
 import { GoalsProvider } from "./context/GoalsContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import { LanguageProvider } from "./context/LanguageContext";
+import Archive from "./pages/Archive";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Dashboard />} />
+              <Route path="/archive" element={<Archive />} />
               <Route path="/goals" element={<Goals />} />
               <Route path="/goals/new" element={<NewGoal />} />
               <Route path="/goals/:id" element={<GoalDetails />} />

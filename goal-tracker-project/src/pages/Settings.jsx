@@ -1,7 +1,22 @@
 import React, { useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 import { LanguageContext } from "../context/LanguageContext";
-import { Box, Typography, Button, FormControl, InputLabel, Select, MenuItem, Paper } from "@mui/material";
+
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LanguageIcon from "@mui/icons-material/Language";
+
+import {
+  Box,
+  Typography,
+  Button,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Paper,
+  Stack
+} from "@mui/material";
 
 export default function Settings() {
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -20,26 +35,56 @@ export default function Settings() {
         margin: "20px auto",
       }}
     >
-      {/* Theme Section */}
-      <Paper sx={{ p: 3, bgcolor: "background.paper", borderRadius: 2, boxShadow: 3 }}>
-        <Typography variant="h5" gutterBottom>
-          {t("theme")}
-        </Typography>
+      {/* 🌙 Theme Section */}
+      <Paper
+        sx={{
+          p: 3,
+          borderRadius: 3,
+          boxShadow: 3,
+        }}
+      >
+        <Stack direction="row" alignItems="center" spacing={1} mb={2}>
+          {theme === "dark" ? <DarkModeIcon /> : <LightModeIcon />}
+          <Typography variant="h5">
+            {t("theme")}
+          </Typography>
+        </Stack>
+
         <Typography variant="body1" sx={{ mb: 2 }}>
           {t("currentTheme")}: {themeLabel}
         </Typography>
-        <Button variant="contained" color="primary" onClick={toggleTheme}>
+
+        <Button
+          variant="contained"
+          onClick={toggleTheme}
+          startIcon={
+            theme === "dark" ? <LightModeIcon /> : <DarkModeIcon />
+          }
+        >
           {t("toggleTheme")}
         </Button>
       </Paper>
 
-      {/* Language Section */}
-      <Paper sx={{ p: 3, bgcolor: "background.paper", borderRadius: 2, boxShadow: 3 }}>
-        <Typography variant="h5" gutterBottom>
-          {t("language")}
-        </Typography>
+      {/* 🌍 Language Section */}
+      <Paper
+        sx={{
+          p: 3,
+          borderRadius: 3,
+          boxShadow: 3,
+        }}
+      >
+        <Stack direction="row" alignItems="center" spacing={1} mb={2}>
+          <LanguageIcon />
+          <Typography variant="h5">
+            {t("language")}
+          </Typography>
+        </Stack>
+
         <FormControl fullWidth>
-          <InputLabel id="language-select-label">{t("selectLanguage")}</InputLabel>
+          <InputLabel id="language-select-label">
+            {t("selectLanguage")}
+          </InputLabel>
+
           <Select
             labelId="language-select-label"
             value={language}
