@@ -1,4 +1,3 @@
-// src/components/GoalCard.jsx
 import React, { useState } from "react";
 import {
   Card,
@@ -11,7 +10,7 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
-  DialogActions
+  DialogActions,
 } from "@mui/material";
 
 export default function GoalCard({
@@ -22,7 +21,7 @@ export default function GoalCard({
   onDelete,
   onAddProgress,
   onViewDetails,
-  onEdit 
+  onEdit,
 }) {
   const progressPercent = Math.round((progress / target) * 100);
   const [openConfirm, setOpenConfirm] = useState(false);
@@ -56,7 +55,11 @@ export default function GoalCard({
 
           <Stack direction="row" spacing={1} mt={1}>
             {onAddProgress && (
-              <Button variant="contained" color="primary" onClick={onAddProgress}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={onAddProgress}
+              >
                 + Progress
               </Button>
             )}
@@ -66,7 +69,11 @@ export default function GoalCard({
               </Button>
             )}
             {onDelete && (
-              <Button variant="outlined" color="error" onClick={handleDeleteClick}>
+              <Button
+                variant="outlined"
+                color="error"
+                onClick={handleDeleteClick}
+              >
                 🗑️ Delete
               </Button>
             )}

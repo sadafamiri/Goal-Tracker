@@ -13,7 +13,7 @@ import {
   Divider,
   List,
   ListItem,
-  ListItemText
+  ListItemText,
 } from "@mui/material";
 
 export default function GoalDetails() {
@@ -39,7 +39,7 @@ export default function GoalDetails() {
         sx={{
           width: "600px",
           p: 4,
-          borderRadius: 3
+          borderRadius: 3,
         }}
       >
         {/* Title */}
@@ -66,7 +66,7 @@ export default function GoalDetails() {
           sx={{
             height: 10,
             borderRadius: 5,
-            mb: 3
+            mb: 3,
           }}
         />
 
@@ -104,9 +104,7 @@ export default function GoalDetails() {
         </Typography>
 
         {(!goal.logs || goal.logs.length === 0) && (
-          <Typography color="text.secondary">
-            No activity yet
-          </Typography>
+          <Typography color="text.secondary">No activity yet</Typography>
         )}
 
         <List>

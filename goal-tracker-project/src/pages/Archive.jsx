@@ -1,4 +1,3 @@
-
 import React, { useContext } from "react";
 import { GoalsContext } from "../context/GoalsContext";
 import GoalCard from "../components/GoalCard";
@@ -28,8 +27,8 @@ export default function Archive() {
                 target={goal.target}
                 category={goal.category}
                 status={goal.status}
-                onDelete={() => deleteGoal(goal.id)}       
-                onEdit={() => restoreGoal(goal.id)}        
+                onDelete={() => deleteGoal(goal.id)}
+                onEdit={() => restoreGoal(goal.id)}
                 onViewDetails={() => console.log("View", goal.id)}
               />
             </Grid>
