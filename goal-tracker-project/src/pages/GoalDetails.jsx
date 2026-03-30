@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { GoalsContext } from "../context/GoalsContext";
+import { LanguageContext } from "../context/LanguageContext";
 
-// MUI
 import {
   Box,
   Typography,
@@ -20,13 +20,14 @@ export default function GoalDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { goals, addProgress, deleteGoal } = useContext(GoalsContext);
+  const { t } = useContext(LanguageContext);
 
   const goal = goals.find((g) => g.id === Number(id));
 
   if (!goal)
     return (
       <Box sx={{ p: 4 }}>
-        <Typography variant="h4">Goal not found</Typography>
+        <Typography variant="h4">{t("goalNotFound")}</Typography>
       </Box>
     );
 
@@ -34,50 +35,36 @@ export default function GoalDetails() {
 
   return (
     <Box sx={{ p: 4, display: "flex", justifyContent: "center" }}>
-      <Paper
-        elevation={4}
-        sx={{
-          width: "600px",
-          p: 4,
-          borderRadius: 3,
-        }}
-      >
-        {/* Title */}
+      <Paper sx={{ width: "600px", p: 4, borderRadius: 3 }}>
         <Typography variant="h4" mb={2}>
           {goal.title}
         </Typography>
 
         <Typography color="text.secondary">
-          Category: {goal.category}
+          {t("category")}: {goal.category}
         </Typography>
 
         <Typography color="text.secondary" mb={2}>
-          Type: {goal.type}
+          {t("type")}: {goal.type}
         </Typography>
 
-        {/* Progress */}
         <Typography variant="h6" mb={1}>
-          Progress: {goal.progress} / {goal.target} ({progressPercent}%)
+          {t("progress")}: {goal.progress} / {goal.target} ({progressPercent}%)
         </Typography>
 
         <LinearProgress
           variant="determinate"
           value={progressPercent}
-          sx={{
-            height: 10,
-            borderRadius: 5,
-            mb: 3,
-          }}
+          sx={{ height: 10, borderRadius: 5, mb: 3 }}
         />
 
-        {/* Buttons */}
         <Stack direction="row" spacing={2} mb={3}>
           <Button
             variant="contained"
             color="success"
             onClick={() => addProgress(goal.id)}
           >
-            + Progress
+            {t("addProgress")}
           </Button>
 
           <Button
@@ -88,23 +75,22 @@ export default function GoalDetails() {
               navigate("/");
             }}
           >
-            Delete Goal
+            {t("deleteGoal")}
           </Button>
 
           <Button variant="outlined" onClick={() => navigate(-1)}>
-            Back
+            {t("back")}
           </Button>
         </Stack>
 
         <Divider sx={{ mb: 2 }} />
 
-        {/* Activity History */}
         <Typography variant="h6" mb={2}>
-          Activity History
+          {t("activityHistory")}
         </Typography>
 
         {(!goal.logs || goal.logs.length === 0) && (
-          <Typography color="text.secondary">No activity yet</Typography>
+          <Typography color="text.secondary">{t("noActivity")}</Typography>
         )}
 
         <List>

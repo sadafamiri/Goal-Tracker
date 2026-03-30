@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { GoalsContext } from "../context/GoalsContext";
 import { useNavigate } from "react-router-dom";
+import { LanguageContext } from "../context/LanguageContext";
 
 // MUI
 import {

@@ -80,7 +80,7 @@ export default function Navbar() {
           <Typography variant="h6" sx={{ fontWeight: "bold" }}>
             {t("dashboard")}
           </Typography>
-          //search
+          
           {/* Search + Links */}
           <Box
             sx={{

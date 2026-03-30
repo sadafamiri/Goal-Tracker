@@ -2,9 +2,12 @@ import React, { useContext } from "react";
 import { GoalsContext } from "../context/GoalsContext";
 import GoalCard from "../components/GoalCard";
 import { Grid, Typography, Box } from "@mui/material";
+import { LanguageContext } from "../context/LanguageContext";
 
 export default function Archive() {
   const { goals, deleteGoal, restoreGoal } = useContext(GoalsContext);
+
+  const { t } = useContext(LanguageContext);
 
   // complete goals
   const completedGoals = goals.filter((goal) => goal.status === "completed");

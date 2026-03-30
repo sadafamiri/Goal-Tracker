@@ -1,11 +1,12 @@
 import React, { useContext, useState } from "react";
 import { GoalsContext } from "../context/GoalsContext";
+import { LanguageContext } from "../context/LanguageContext";
 import GoalCard from "../components/GoalCard";
 import { useNavigate } from "react-router-dom";
+
 import SearchIcon from "@mui/icons-material/Search";
 import InputAdornment from "@mui/material/InputAdornment";
 
-// MUI
 import {
   Box,
   Typography,
@@ -21,30 +22,27 @@ import {
 
 export default function Goals() {
   const { goals, deleteGoal, addProgress } = useContext(GoalsContext);
+  const { t } = useContext(LanguageContext);
+
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
-
   const [filter, setFilter] = useState("All");
 
   const filteredGoals = goals.filter((goal) => {
     const matchCategory = filter === "All" || goal.category === filter;
-
     const matchSearch = goal.title.toLowerCase().includes(search.toLowerCase());
-
     return matchCategory && matchSearch;
   });
 
   return (
     <Box sx={{ p: 4 }}>
       <Typography variant="h3" mb={3}>
-        All Goals
+        {t("allGoals")}
       </Typography>
 
-      {/* Filter + Button */}
       <Stack direction="row" spacing={3} mb={4} alignItems="center">
-        {/* 🔍 Search */}
         <TextField
-          label="Search goals..."
+          label={t("searchGoals")}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           sx={{ minWidth: 250 }}
@@ -57,16 +55,15 @@ export default function Goals() {
           }}
         />
 
-        {/* 🎯 Category */}
         <FormControl sx={{ minWidth: 200 }}>
-          <InputLabel>Category</InputLabel>
+          <InputLabel>{t("category")}</InputLabel>
 
           <Select
             value={filter}
-            label="Category"
+            label={t("category")}
             onChange={(e) => setFilter(e.target.value)}
           >
-            <MenuItem value="All">All</MenuItem>
+            <MenuItem value="All">{t("all")}</MenuItem>
             <MenuItem value="Study">Study</MenuItem>
             <MenuItem value="Work">Work</MenuItem>
             <MenuItem value="Health">Health</MenuItem>
@@ -74,17 +71,11 @@ export default function Goals() {
           </Select>
         </FormControl>
 
-        {/* ➕ Button */}
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => navigate("/goals/new")}
-        >
-          + Create New Goal
+        <Button variant="contained" onClick={() => navigate("/goals/new")}>
+          {t("createGoal")}
         </Button>
       </Stack>
 
-      {/* Goals List */}
       <Grid container spacing={3}>
         {filteredGoals.map((goal) => (
           <Grid item xs={12} sm={6} md={4} key={goal.id}>

@@ -15,7 +15,7 @@ import {
   Select,
   MenuItem,
   Paper,
-  Stack
+  Stack,
 } from "@mui/material";
 
 export default function Settings() {
@@ -45,9 +45,7 @@ export default function Settings() {
       >
         <Stack direction="row" alignItems="center" spacing={1} mb={2}>
           {theme === "dark" ? <DarkModeIcon /> : <LightModeIcon />}
-          <Typography variant="h5">
-            {t("theme")}
-          </Typography>
+          <Typography variant="h5">{t("theme")}</Typography>
         </Stack>
 
         <Typography variant="body1" sx={{ mb: 2 }}>
@@ -57,9 +55,7 @@ export default function Settings() {
         <Button
           variant="contained"
           onClick={toggleTheme}
-          startIcon={
-            theme === "dark" ? <LightModeIcon /> : <DarkModeIcon />
-          }
+          startIcon={theme === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
         >
           {t("toggleTheme")}
         </Button>
@@ -75,9 +71,7 @@ export default function Settings() {
       >
         <Stack direction="row" alignItems="center" spacing={1} mb={2}>
           <LanguageIcon />
-          <Typography variant="h5">
-            {t("language")}
-          </Typography>
+          <Typography variant="h5">{t("language")}</Typography>
         </Stack>
 
         <FormControl fullWidth>

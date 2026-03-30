@@ -1,6 +1,9 @@
+// src/pages/Dashboard.jsx
 import React, { useContext } from "react";
 import { GoalsContext } from "../context/GoalsContext";
+import { LanguageContext } from "../context/LanguageContext";
 import GoalCard from "../components/GoalCard";
+
 import {
   Grid,
   Typography,
@@ -8,78 +11,69 @@ import {
   Box,
   Paper,
   LinearProgress,
-  Stack
+  Stack,
 } from "@mui/material";
+
 import { useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
   const { goals, deleteGoal, addProgress, xp, streak } =
     useContext(GoalsContext);
 
+  const { t } = useContext(LanguageContext);
   const navigate = useNavigate();
 
-  // 📊 محاسبات
   const totalGoals = goals.length;
 
-  const completedGoals = goals.filter(
-    (g) => g.progress >= g.target
-  ).length;
+  const completedGoals = goals.filter((g) => g.progress >= g.target).length;
 
-  const activeGoals = goals.filter(
-    (g) => g.status === "active"
-  );
+  const activeGoals = goals.filter((g) => g.status === "active");
 
-  const completedList = goals.filter(
-    (g) => g.status === "completed"
-  );
+  const completedList = goals.filter((g) => g.status === "completed");
 
-  const totalProgress = goals.reduce(
-    (acc, g) => acc + g.progress,
-    0
-  );
+  const totalProgress = goals.reduce((acc, g) => acc + g.progress, 0);
 
-  const totalTarget = goals.reduce(
-    (acc, g) => acc + g.target,
-    1
-  );
+  const totalTarget = goals.reduce((acc, g) => acc + g.target, 0);
 
-  const percent = Math.round(
-    (totalProgress / totalTarget) * 100
-  );
+  const percent =
+    totalTarget === 0 ? 0 : Math.round((totalProgress / totalTarget) * 100);
 
   return (
     <Box sx={{ p: 3 }}>
-
       {/* 🔥 Header */}
       <Typography variant="h4" mb={2}>
-        Dashboard
+        {t("dashboard")}
       </Typography>
 
       {/* ⚡ XP + Streak */}
       <Stack direction="row" spacing={3} mb={3}>
-        <Typography>🔥 XP: {xp}</Typography>
-        <Typography>⚡ Streak: {streak} days</Typography>
+        <Typography>
+          🔥 {t("xp")}: {xp}
+        </Typography>
+        <Typography>
+          ⚡ {t("streak")}: {streak} {t("days")}
+        </Typography>
       </Stack>
 
       {/* 📊 Summary Cards */}
       <Grid container spacing={2} mb={3}>
         <Grid item xs={12} sm={4}>
           <Paper sx={{ p: 2, borderRadius: 3 }}>
-            <Typography>Total Goals</Typography>
+            <Typography>{t("totalGoals")}</Typography>
             <Typography variant="h5">{totalGoals}</Typography>
           </Paper>
         </Grid>
 
         <Grid item xs={12} sm={4}>
           <Paper sx={{ p: 2, borderRadius: 3 }}>
-            <Typography>Completed</Typography>
+            <Typography>{t("completedGoals")}</Typography>
             <Typography variant="h5">{completedGoals}</Typography>
           </Paper>
         </Grid>
 
         <Grid item xs={12} sm={4}>
           <Paper sx={{ p: 2, borderRadius: 3 }}>
-            <Typography>Progress</Typography>
+            <Typography>{t("progress")}</Typography>
             <Typography variant="h5">{percent}%</Typography>
           </Paper>
         </Grid>
@@ -87,7 +81,7 @@ export default function Dashboard() {
 
       {/* 📈 Overall Progress */}
       <Box mb={4}>
-        <Typography mb={1}>Overall Progress</Typography>
+        <Typography mb={1}>{t("overallProgress")}</Typography>
         <LinearProgress
           variant="determinate"
           value={percent}
@@ -97,29 +91,23 @@ export default function Dashboard() {
 
       {/* ➕ Actions */}
       <Stack direction="row" spacing={2} mb={3}>
-        <Button
-          variant="contained"
-          onClick={() => navigate("/goals/new")}
-        >
-          + New Goal
+        <Button variant="contained" onClick={() => navigate("/goals/new")}>
+          {t("newGoal")}
         </Button>
 
-        <Button
-          variant="outlined"
-          onClick={() => navigate("/goals")}
-        >
-          View All Goals
+        <Button variant="outlined" onClick={() => navigate("/goals")}>
+          {t("viewAllGoals")}
         </Button>
       </Stack>
 
       {/* 🎯 Active Goals */}
       <Typography variant="h5" mb={2}>
-        Active Goals
+        {t("activeGoals")}
       </Typography>
 
       <Grid container spacing={2} mb={4}>
         {activeGoals.length === 0 ? (
-          <Typography>No active goals</Typography>
+          <Typography>{t("noActiveGoals")}</Typography>
         ) : (
           activeGoals.map((goal) => (
             <Grid item xs={12} sm={6} md={4} key={goal.id}>
@@ -130,9 +118,7 @@ export default function Dashboard() {
                 category={goal.category}
                 onDelete={() => deleteGoal(goal.id)}
                 onAddProgress={() => addProgress(goal.id)}
-                onViewDetails={() =>
-                  navigate(`/goals/${goal.id}`)
-                }
+                onViewDetails={() => navigate(`/goals/${goal.id}`)}
               />
             </Grid>
           ))
@@ -141,7 +127,7 @@ export default function Dashboard() {
 
       {/* ✅ Completed Preview */}
       <Typography variant="h5" mb={2}>
-        Completed Goals
+        {t("completedGoals")}
       </Typography>
 
       <Grid container spacing={2}>
@@ -157,13 +143,9 @@ export default function Dashboard() {
         ))}
       </Grid>
 
-      <Button
-        sx={{ mt: 2 }}
-        onClick={() => navigate("/archive")}
-      >
-        View Archive
+      <Button sx={{ mt: 2 }} onClick={() => navigate("/archive")}>
+        {t("viewArchive")}
       </Button>
-
     </Box>
   );
 }
