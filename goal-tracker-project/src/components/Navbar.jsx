@@ -41,14 +41,6 @@ export default function Navbar() {
     { path: "/settings", label: t("settings") },
   ];
 
-  const linkStyle = ({ isActive }) => ({
-    textDecoration: "none",
-    color: isActive
-      ? muiTheme.palette.primary.main
-      : muiTheme.palette.text.primary,
-    fontWeight: isActive ? "bold" : "normal",
-  });
-
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
 
   const drawer = (
@@ -69,9 +61,16 @@ export default function Navbar() {
     <>
       <AppBar
         position="static"
-        color={theme === "dark" ? "default" : "primary"}
+        sx={{
+          backgroundColor:
+            theme === "dark"
+              ? muiTheme.palette.background.paper
+              : muiTheme.palette.primary.main,
+          color: theme === "dark" ? muiTheme.palette.text.primary : "#fff",
+        }}
       >
         <Toolbar sx={{ justifyContent: "space-between", flexWrap: "wrap" }}>
+          {/* Hamburger */}
           <IconButton
             color="inherit"
             edge="start"
@@ -80,11 +79,13 @@ export default function Navbar() {
           >
             <MenuIcon />
           </IconButton>
+
+          {/* Title */}
           <Typography variant="h6" sx={{ fontWeight: "bold" }}>
             {t("dashboard")}
           </Typography>
-          
-          {/* Search + Links */}
+
+          {/* Desktop Links + Search */}
           <Box
             sx={{
               display: { xs: "none", sm: "flex" },
@@ -104,23 +105,39 @@ export default function Navbar() {
                 border: "1px solid",
                 borderColor: "divider",
                 width: 200,
+                display: "flex",
+                alignItems: "center",
               }}
               startAdornment={<SearchIcon sx={{ mr: 1 }} />}
             />
+
             <Stack direction="row" spacing={1}>
               {links.map((link) => (
                 <Button
                   key={link.path}
                   component={NavLink}
                   to={link.path}
-                  sx={{ color: "inherit", textTransform: "none" }}
-                  style={({ isActive }) => linkStyle({ isActive })}
+                  sx={{
+                    color:
+                      theme === "dark"
+                        ? muiTheme.palette.text.primary
+                        : "#fff",
+                    fontWeight: "normal",
+                    textTransform: "none",
+                  }}
+                  style={({ isActive }) => ({
+                    fontWeight: isActive ? "bold" : "normal",
+                    borderBottom: isActive
+                      ? `2px solid ${muiTheme.palette.secondary.main}`
+                      : "none",
+                  })}
                 >
                   {link.label}
                 </Button>
               ))}
             </Stack>
           </Box>
+
           {/* Dark / Light Toggle */}
           <IconButton color="inherit" onClick={toggleTheme}>
             {theme === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
@@ -128,6 +145,7 @@ export default function Navbar() {
         </Toolbar>
       </AppBar>
 
+      {/* Mobile Drawer */}
       <Drawer
         anchor="left"
         open={mobileOpen}
