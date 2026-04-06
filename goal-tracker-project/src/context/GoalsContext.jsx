@@ -6,7 +6,6 @@ export const GoalsContext = createContext(null);
 const STORAGE_KEY = "goals";
 
 export function GoalsProvider({ children }) {
-
   // Goals state
   const [goals, setGoals] = useState(() => {
     try {
@@ -36,36 +35,40 @@ export function GoalsProvider({ children }) {
     localStorage.setItem("streak", JSON.stringify(streak));
   }, [goals, xp, streak]);
 
-  // Delete goal
-  const deleteGoal = (id) => {
-    const newGoals = goals.filter((goal) => goal.id !== id);
-    setGoals(newGoals);
+  //  Add Goal
+  const addGoal = (goal) => {
+    setGoals((prev) => [...prev, { ...goal, id: Date.now() }]);
   };
 
-  // Add progress
-  const addProgress = (id) => {
+  //  Delete Goal
+  const deleteGoal = (id) => {
+    setGoals((prev) => prev.filter((goal) => goal.id !== id));
+  };
 
+  //  Update Goal
+  const updateGoal = (id, updatedGoal) => {
+    setGoals((prev) =>
+      prev.map((goal) => (goal.id === id ? updatedGoal : goal)),
+    );
+  };
+
+  // Add Progress
+  const addProgress = (id) => {
     const today = new Date().toDateString();
 
     const newGoals = goals.map((goal) => {
-
       if (goal.id !== id) return goal;
 
-      
-      if (goal.progress >= goal.target) {
-        return goal;
-      }
+      if (goal.progress >= goal.target) return goal;
 
       const lastLog =
-        goal.logs && goal.logs.length
-          ? goal.logs[goal.logs.length - 1]
-          : null;
+        goal.logs && goal.logs.length ? goal.logs[goal.logs.length - 1] : null;
 
       const lastLogDate = lastLog
         ? new Date(lastLog.date).toDateString()
         : null;
 
-      //STREAK
+      //  STREAK
       if (lastLogDate !== today) {
         const yesterday = new Date();
         yesterday.setDate(yesterday.getDate() - 1);
@@ -77,10 +80,10 @@ export function GoalsProvider({ children }) {
         }
       }
 
-      // PROGRESS 
+      //  PROGRESS
       const newProgress = goal.progress + 1;
 
-      // XP 
+      //  XP
       setXp((prev) => prev + 10);
 
       const newLog = {
@@ -94,31 +97,26 @@ export function GoalsProvider({ children }) {
         logs: [...(goal.logs || []), newLog],
         status: newProgress >= goal.target ? "completed" : "active",
       };
-
     });
 
     setGoals(newGoals);
   };
 
-  const updateGoals = (nextGoals) => {
-    setGoals(nextGoals);
-  };
-
+  //  Value
   const value = useMemo(
     () => ({
       goals,
-      updateGoals,
+      addGoal,
       deleteGoal,
+      updateGoal,
       addProgress,
       xp,
       streak,
     }),
-    [goals, xp, streak]
+    [goals, xp, streak],
   );
 
   return (
-    <GoalsContext.Provider value={value}>
-      {children}
-    </GoalsContext.Provider>
+    <GoalsContext.Provider value={value}>{children}</GoalsContext.Provider>
   );
 }

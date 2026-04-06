@@ -17,7 +17,7 @@ export default function Categories() {
   const { goals } = useContext(GoalsContext);
   const navigate = useNavigate();
 
-  // گرفتن دسته بندی های یکتا
+  
   const categories = [...new Set(goals.map((goal) => goal.category))];
 
   return (

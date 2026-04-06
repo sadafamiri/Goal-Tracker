@@ -119,30 +119,49 @@ export default function Dashboard() {
                 onDelete={() => deleteGoal(goal.id)}
                 onAddProgress={() => addProgress(goal.id)}
                 onViewDetails={() => navigate(`/goals/${goal.id}`)}
+                onEdit={() => navigate(`/goals/edit/${goal.id}`)}
               />
             </Grid>
           ))
         )}
       </Grid>
 
-      {/* ✅ Completed Preview */}
+      {/*  Completed Preview  */}
       <Typography variant="h5" mb={2}>
         {t("completedGoals")}
       </Typography>
 
       <Grid container spacing={2}>
-        {completedList.slice(0, 3).map((goal) => (
-          <Grid item xs={12} sm={6} md={4} key={goal.id}>
-            <GoalCard
-              title={goal.title}
-              progress={goal.progress}
-              target={goal.target}
-              category={goal.category}
-            />
-          </Grid>
-        ))}
+        {completedList.length === 0 ? (
+          <Typography>{t("noActiveGoals")}</Typography>
+        ) : (
+          completedList.slice(0, 3).map((goal) => (
+            <Grid item xs={12} sm={6} md={4} key={goal.id}>
+              <Paper sx={{ p: 2, borderRadius: 3 }}>
+                <Typography variant="h6">{goal.title}</Typography>
+
+                <Typography color="text.secondary" mb={1}>
+                  {goal.category}
+                </Typography>
+
+                <Typography color="success.main" mb={1}>
+                  ✅ {t("completedGoals")}
+                </Typography>
+
+                <Button
+                  variant="outlined"
+                  size="small"
+                  onClick={() => navigate("/archive")}
+                >
+                  {t("viewArchive")}
+                </Button>
+              </Paper>
+            </Grid>
+          ))
+        )}
       </Grid>
 
+      {/* button Archive */}
       <Button sx={{ mt: 2 }} onClick={() => navigate("/archive")}>
         {t("viewArchive")}
       </Button>

@@ -6,6 +6,7 @@ import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 import Goals from "./pages/Goals";
 import NewGoal from "./pages/NewGoal";
+import Edit from "./pages/Edit";
 
 import { Route, Routes } from "react-router-dom";
 
@@ -28,6 +29,7 @@ function App() {
               <Route path="/goals/:id" element={<GoalDetails />} />
               <Route path="/categories" element={<Categories />} />
               <Route path="/settings" element={<Settings />} />
+              <Route path="/goals/edit/:id" element={<Edit/>} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>

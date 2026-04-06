@@ -3,6 +3,7 @@ import { GoalsContext } from "../context/GoalsContext";
 import GoalCard from "../components/GoalCard";
 import { Grid, Typography, Box } from "@mui/material";
 import { LanguageContext } from "../context/LanguageContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Archive() {
   const { goals, deleteGoal, restoreGoal } = useContext(GoalsContext);
