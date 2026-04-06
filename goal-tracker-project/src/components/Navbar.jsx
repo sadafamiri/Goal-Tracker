@@ -13,6 +13,7 @@ import {
   Drawer,
   List,
   ListItem,
+  ListItemButton,
   ListItemText,
   InputBase,
   Stack,
@@ -54,8 +55,10 @@ export default function Navbar() {
     <Box sx={{ width: 250 }} onClick={handleDrawerToggle}>
       <List>
         {links.map((link) => (
-          <ListItem button key={link.path} component={NavLink} to={link.path}>
-            <ListItemText primary={link.label} />
+          <ListItem key={link.path} disablePadding>
+            <ListItemButton component={NavLink} to={link.path}>
+              <ListItemText primary={link.label} />
+            </ListItemButton>
           </ListItem>
         ))}
       </List>
