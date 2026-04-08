@@ -35,7 +35,7 @@ export default function Settings() {
         margin: "20px auto",
       }}
     >
-      {/* 🌙 Theme Section */}
+      {/*  Theme Section */}
       <Paper
         sx={{
           p: 3,
@@ -87,6 +87,7 @@ export default function Settings() {
           >
             <MenuItem value="en">{t("english")}</MenuItem>
             <MenuItem value="fa">{t("persian")}</MenuItem>
+            <MenuItem value="ps">{t("pashato")}</MenuItem>
           </Select>
         </FormControl>
       </Paper>

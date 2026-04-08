@@ -7,20 +7,19 @@ import { useNavigate } from "react-router-dom";
 
 export default function Archive() {
   const { goals, deleteGoal, restoreGoal } = useContext(GoalsContext);
-
   const { t } = useContext(LanguageContext);
+  const navigate = useNavigate();
 
-  // complete goals
   const completedGoals = goals.filter((goal) => goal.status === "completed");
 
   return (
     <Box sx={{ p: 4 }}>
       <Typography variant="h4" sx={{ mb: 3 }}>
-        Completed Goals Archive
+        {t("archive")}
       </Typography>
 
       {completedGoals.length === 0 ? (
-        <Typography variant="body1">Yet No complete goal tacker.</Typography>
+        <Typography>{t("noCompleted")}</Typography>
       ) : (
         <Grid container spacing={2}>
           {completedGoals.map((goal) => (
@@ -30,10 +29,16 @@ export default function Archive() {
                 progress={goal.progress}
                 target={goal.target}
                 category={goal.category}
-                status={goal.status}
                 onDelete={() => deleteGoal(goal.id)}
-                onEdit={() => restoreGoal(goal.id)}
-                onViewDetails={() => console.log("View", goal.id)}
+
+                //  Edit
+                onEdit={() => navigate(`/goals/edit/${goal.id}`)}
+
+                //  Details
+                onViewDetails={() => navigate(`/goals/${goal.id}`)}
+
+                //  Restore
+                onAddProgress={() => restoreGoal(goal.id)}
               />
             </Grid>
           ))}

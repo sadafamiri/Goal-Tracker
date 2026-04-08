@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { GoalsContext } from "../context/GoalsContext";
 import { useNavigate } from "react-router-dom";
 import { LanguageContext } from "../context/LanguageContext";
+
 import {
   Box,
   Typography,
@@ -14,7 +15,8 @@ import {
 } from "@mui/material";
 
 export default function NewGoal() {
-  const { goals, updateGoals } = useContext(GoalsContext);
+  const { addGoal } = useContext(GoalsContext);
+  const { t } = useContext(LanguageContext);
   const navigate = useNavigate();
 
   const [title, setTitle] = useState("");
@@ -26,7 +28,6 @@ export default function NewGoal() {
     e.preventDefault();
 
     const newGoal = {
-      id: Date.now(),
       title,
       category,
       type,
@@ -37,9 +38,7 @@ export default function NewGoal() {
       createdAt: new Date().toISOString(),
     };
 
-    const newGoalsArray = [...goals, newGoal];
-    updateGoals(newGoalsArray);
-
+    addGoal(newGoal);
     navigate("/");
   };
 
@@ -56,12 +55,12 @@ export default function NewGoal() {
       }}
     >
       <Typography variant="h4" mb={3}>
-        Create New Goal
+        {t("createGoal")}
       </Typography>
 
       <form onSubmit={handleSubmit}>
         <TextField
-          label="Title"
+          label={t("title")}
           fullWidth
           value={title}
           onChange={(e) => setTitle(e.target.value)}
@@ -70,11 +69,10 @@ export default function NewGoal() {
         />
 
         <FormControl fullWidth margin="normal">
-          <InputLabel>Category</InputLabel>
+          <InputLabel>{t("category")}</InputLabel>
           <Select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            label="Category"
           >
             <MenuItem value="Study">Study</MenuItem>
             <MenuItem value="Work">Work</MenuItem>
@@ -84,25 +82,23 @@ export default function NewGoal() {
         </FormControl>
 
         <FormControl fullWidth margin="normal">
-          <InputLabel>Type</InputLabel>
+          <InputLabel>{t("type")}</InputLabel>
           <Select
             value={type}
             onChange={(e) => setType(e.target.value)}
-            label="Type"
           >
-            <MenuItem value="daily">Daily</MenuItem>
-            <MenuItem value="count">Count-based</MenuItem>
-            <MenuItem value="time">Time-based</MenuItem>
+            <MenuItem value="daily">{t("daily")}</MenuItem>
+            <MenuItem value="count">{t("count")}</MenuItem>
+            <MenuItem value="time">{t("time")}</MenuItem>
           </Select>
         </FormControl>
 
         <TextField
-          label="Target"
+          label={t("target")}
           type="number"
           fullWidth
           value={target}
           onChange={(e) => setTarget(e.target.value)}
-          inputProps={{ min: 1 }}
           required
           margin="normal"
         />
@@ -110,11 +106,10 @@ export default function NewGoal() {
         <Button
           type="submit"
           variant="contained"
-          color="primary"
           sx={{ mt: 3 }}
           fullWidth
         >
-          Create Goal
+          {t("create")}
         </Button>
       </form>
     </Box>

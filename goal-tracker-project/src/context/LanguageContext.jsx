@@ -9,7 +9,9 @@ export function LanguageProvider({ children }) {
 
   useEffect(() => {
     localStorage.setItem("language", language);
-    const dir = language === "fa" ? "rtl" : "ltr";
+
+    const dir = language === "fa" || language === "ps" ? "rtl" : "ltr";
+
     document.documentElement.setAttribute("dir", dir);
     document.documentElement.setAttribute("lang", language);
   }, [language]);
@@ -17,21 +19,37 @@ export function LanguageProvider({ children }) {
   const changeLanguage = (lang) => setLanguage(lang);
 
   const translations = {
+    // 🇺🇸 English
     en: {
       dashboard: "Dashboard",
       goals: "Goals",
       categories: "Categories",
       settings: "Settings",
+      archive: "Archive",
+
       theme: "Theme",
       currentTheme: "Current Theme",
       toggleTheme: "Toggle Theme",
       light: "Light",
       dark: "Dark",
+
       language: "Language",
       english: "English",
       persian: "Persian",
+      pashto: "Pashto",
 
-      // dashboard page
+      noCompleted: "No completed goals yet",
+
+      viewGoals: "View Goals",
+      createGoal: "Create New Goal",
+
+      title: "Title",
+      category: "Category",
+      type: "Type",
+      target: "Target",
+      create: "Create",
+
+      // dashboard
       totalGoals: "Total Goals",
       completedGoals: "Completed Goals",
       progress: "Progress",
@@ -44,24 +62,50 @@ export function LanguageProvider({ children }) {
       xp: "XP",
       streak: "Streak",
       days: "days",
+
+      // goals page
+      allGoals: "All Goals",
+      searchGoals: "Search goals...",
+
+      // details
+      addProgress: "+ Add Progress",
+      deleteGoal: "Delete Goal",
+      back: "Back",
+      activityHistory: "Activity History",
+      noActivity: "No activity yet",
     },
+
+    // 🇮 Persian
     fa: {
       dashboard: "داشبورد",
       archive: "آرشیف",
       goals: "اهداف",
       categories: "دسته‌بندی‌ها",
       settings: "تنظیمات",
+
       theme: "تم",
       currentTheme: "تم فعلی",
       toggleTheme: "تغییر تم",
       light: "روشن",
       dark: "تاریک",
+
       language: "زبان",
       english: "انگلیسی",
       persian: "فارسی",
-      totalGoals: "مجموع اهداف",
+      pashto: "پشتو",
 
-      // dashboard page
+      noCompleted: "هنوز هدفی تکمیل نشده",
+
+      viewGoals: "مشاهده اهداف",
+      createGoal: "+ ایجاد هدف جدید",
+
+      title: "عنوان",
+      category: "دسته‌بندی",
+      type: "نوع",
+      target: "هدف",
+      create: "ایجاد",
+
+      totalGoals: "مجموع اهداف",
       completedGoals: "اهداف تکمیل شده",
       progress: "پیشرفت",
       overallProgress: "پیشرفت کلی",
@@ -74,23 +118,67 @@ export function LanguageProvider({ children }) {
       streak: "استریک",
       days: "روز",
 
-      //  goals page
       allGoals: "همه اهداف",
       searchGoals: "جستجوی هدف...",
-      all: "همه",
-      createGoal: "+ ایجاد هدف جدید",
 
-      //  categories
-      viewGoals: "مشاهده اهداف",
-
-      //  goal details
-      category: "دسته‌بندی",
-      type: "نوع",
       addProgress: "+ پیشرفت",
       deleteGoal: "حذف هدف",
       back: "برگشت",
       activityHistory: "تاریخچه فعالیت",
       noActivity: "هنوز فعالیتی وجود ندارد",
+    },
+
+    //  Pashto
+    ps: {
+      dashboard: "ډشبورډ",
+      archive: "ارشیف",
+      goals: "موخې",
+      categories: "کتګورۍ",
+      settings: "تنظیمات",
+
+      theme: "بڼه",
+      currentTheme: "اوسنی بڼه",
+      toggleTheme: "بڼه بدلول",
+      light: "روښانه",
+      dark: "تیاره",
+
+      language: "ژبه",
+      english: "انګلیسي",
+      persian: "فارسي",
+      pashto: "پښتو",
+
+      noCompleted: "تر اوسه هېڅ موخه نه ده بشپړه شوې",
+
+      viewGoals: "موخې وګورئ",
+      createGoal: "+ نوې موخه جوړ کړئ",
+
+      title: "سرلیک",
+      category: "کتګوري",
+      type: "ډول",
+      target: "هدف",
+      create: "جوړ کړئ",
+
+      totalGoals: "ټولې موخې",
+      completedGoals: "بشپړې شوې موخې",
+      progress: "پرمختګ",
+      overallProgress: "ټول پرمختګ",
+      newGoal: "+ نوې موخه",
+      viewAllGoals: "ټولې موخې وګورئ",
+      activeGoals: "فعاله موخې",
+      noActiveGoals: "هیڅ فعاله موخه نشته",
+      viewArchive: "ارشیف وګورئ",
+      xp: "XP",
+      streak: "سټریک",
+      days: "ورځې",
+
+      allGoals: "ټولې موخې",
+      searchGoals: "موخې ولټوئ...",
+
+      addProgress: "+ پرمختګ",
+      deleteGoal: "موخه حذف کړئ",
+      back: "شاته",
+      activityHistory: "فعالیت تاریخ",
+      noActivity: "هیڅ فعالیت نشته",
     },
   };
 
@@ -99,7 +187,7 @@ export function LanguageProvider({ children }) {
       value={{
         language,
         changeLanguage,
-        t: (key) => translations[language][key] ?? key,
+        t: (key) => translations[language]?.[key] ?? key,
       }}
     >
       {children}
