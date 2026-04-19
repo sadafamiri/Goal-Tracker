@@ -36,9 +36,6 @@ export default function Archive() {
 
                 //  Details
                 onViewDetails={() => navigate(`/goals/${goal.id}`)}
-
-                //  Restore
-                onAddProgress={() => restoreGoal(goal.id)}
               />
             </Grid>
           ))}

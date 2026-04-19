@@ -161,10 +161,6 @@ export default function Dashboard() {
         )}
       </Grid>
 
-      {/* button Archive */}
-      <Button sx={{ mt: 2 }} onClick={() => navigate("/archive")}>
-        {t("viewArchive")}
-      </Button>
     </Box>
   );
 }
