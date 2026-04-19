@@ -13,10 +13,12 @@ import { Route, Routes } from "react-router-dom";
 import { GoalsProvider } from "./context/GoalsContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import { LanguageProvider } from "./context/LanguageContext";
+import { SearchProvider } from "./context/SearchContext";
 import Archive from "./pages/Archive";
 
 function App() {
   return (
+    <SearchProvider>
     <ThemeProvider>
       <LanguageProvider>
         <GoalsProvider>
@@ -36,6 +38,7 @@ function App() {
         </GoalsProvider>
       </LanguageProvider>
     </ThemeProvider>
+    </SearchProvider>
   );
 }
 

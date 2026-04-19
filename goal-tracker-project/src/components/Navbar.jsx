@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { LanguageContext } from "../context/LanguageContext";
 import { ThemeContext } from "../context/ThemeContext";
+import { SearchContext } from "../context/SearchContext";
 
 import {
   AppBar,
@@ -28,10 +29,10 @@ import SearchIcon from "@mui/icons-material/Search";
 export default function Navbar() {
   const { t } = useContext(LanguageContext);
   const { theme, toggleTheme } = useContext(ThemeContext);
+  const { search, setSearch } = useContext(SearchContext);
   const muiTheme = useTheme();
 
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [search, setSearch] = useState("");
 
   const links = [
     { path: "/", label: t("dashboard") },
@@ -70,22 +71,48 @@ export default function Navbar() {
         }}
       >
         <Toolbar sx={{ justifyContent: "space-between", flexWrap: "wrap" }}>
-          {/* Hamburger */}
-          <IconButton
-            color="inherit"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ display: { sm: "none" } }}
+
+          {/* 🔹 Left: Menu + Title */}
+          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+            <IconButton
+              color="inherit"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ display: { sm: "none" } }}
+            >
+              <MenuIcon />
+            </IconButton>
+
+            <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+              {t("dashboard")}
+            </Typography>
+          </Box>
+
+          {/* 🔹 Center: Search */}
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+              px: 1,
+              py: 0.5,
+              bgcolor: "background.paper",
+              borderRadius: 1,
+              border: "1px solid",
+              borderColor: "divider",
+              width: 220,
+            }}
           >
-            <MenuIcon />
-          </IconButton>
+            <SearchIcon />
+            <InputBase
+              placeholder={t("searchGoals")}
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              sx={{ width: "100%" }}
+            />
+          </Box>
 
-          {/* Title */}
-          <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-            {t("dashboard")}
-          </Typography>
-
-          {/* Desktop Links + Search */}
+          {/* 🔹 Right: Links + Theme */}
           <Box
             sx={{
               display: { xs: "none", sm: "flex" },
@@ -93,24 +120,6 @@ export default function Navbar() {
               gap: 2,
             }}
           >
-            <InputBase
-              placeholder={t("search")}
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              sx={{
-                px: 1,
-                py: 0.5,
-                bgcolor: "background.paper",
-                borderRadius: 1,
-                border: "1px solid",
-                borderColor: "divider",
-                width: 200,
-                display: "flex",
-                alignItems: "center",
-              }}
-              startAdornment={<SearchIcon sx={{ mr: 1 }} />}
-            />
-
             <Stack direction="row" spacing={1}>
               {links.map((link) => (
                 <Button
@@ -122,7 +131,6 @@ export default function Navbar() {
                       theme === "dark"
                         ? muiTheme.palette.text.primary
                         : "#fff",
-                    fontWeight: "normal",
                     textTransform: "none",
                   }}
                   style={({ isActive }) => ({
@@ -136,16 +144,17 @@ export default function Navbar() {
                 </Button>
               ))}
             </Stack>
+
+            {/* 🌙 Theme Toggle */}
+            <IconButton color="inherit" onClick={toggleTheme}>
+              {theme === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
+            </IconButton>
           </Box>
 
-          {/* Dark / Light Toggle */}
-          <IconButton color="inherit" onClick={toggleTheme}>
-            {theme === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
-          </IconButton>
         </Toolbar>
       </AppBar>
 
-      {/* Mobile Drawer */}
+      {/* 📱 Mobile Drawer */}
       <Drawer
         anchor="left"
         open={mobileOpen}

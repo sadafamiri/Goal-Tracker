@@ -42,6 +42,8 @@ export function LanguageProvider({ children }) {
 
       viewGoals: "View Goals",
       createGoal: "Create New Goal",
+      delete : "DELETE",
+      edit : "EDIT",
 
       title: "Title",
       category: "Category",
@@ -98,6 +100,8 @@ export function LanguageProvider({ children }) {
 
       viewGoals: "مشاهده اهداف",
       createGoal: "+ ایجاد هدف جدید",
+      delete: "حذف",
+      edit: "تغییرات",
 
       title: "عنوان",
       category: "دسته‌بندی",

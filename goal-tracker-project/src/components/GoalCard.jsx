@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Card,
   CardContent,
@@ -13,6 +13,8 @@ import {
   DialogActions,
 } from "@mui/material";
 
+import { LanguageContext } from "../context/LanguageContext";
+
 export default function GoalCard({
   title,
   progress,
@@ -23,6 +25,8 @@ export default function GoalCard({
   onViewDetails,
   onEdit,
 }) {
+  const { t } = useContext(LanguageContext);
+
   const progressPercent = Math.round((progress / target) * 100);
   const [openConfirm, setOpenConfirm] = useState(false);
 
@@ -38,8 +42,9 @@ export default function GoalCard({
       <Card sx={{ mb: 2, cursor: "pointer", position: "relative" }}>
         <CardContent>
           <Typography variant="h6">{title}</Typography>
+
           <Typography variant="body2" color="text.secondary">
-            Category: {category}
+            {t("category")}: {category}
           </Typography>
 
           <Box sx={{ my: 1 }}>
@@ -55,47 +60,46 @@ export default function GoalCard({
 
           <Stack direction="row" spacing={1} mt={1}>
             {onAddProgress && (
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={onAddProgress}
-              >
-                + Progress
+              <Button variant="contained" onClick={onAddProgress}>
+                {t("addProgress")}
               </Button>
             )}
+
             {onEdit && (
-              <Button variant="outlined" color="secondary" onClick={onEdit}>
-                ✏️ Edit
+              <Button variant="outlined" onClick={onEdit}>
+                ✏️ {t("edit")}
               </Button>
             )}
+
             {onDelete && (
               <Button
                 variant="outlined"
                 color="error"
                 onClick={handleDeleteClick}
               >
-                🗑️ Delete
+                🗑️ {t("delete")}
               </Button>
             )}
+
             {onViewDetails && (
               <Button variant="text" onClick={onViewDetails}>
-                View Details
+                {t("viewDetails")}
               </Button>
             )}
           </Stack>
         </CardContent>
       </Card>
 
-      {/* Confirm Delete Dialog */}
+      {/* Dialog */}
       <Dialog open={openConfirm} onClose={handleCancelDelete}>
-        <DialogTitle>Confirm Delete</DialogTitle>
+        <DialogTitle>{t("confirmDelete")}</DialogTitle>
         <DialogContent>
-          <Typography>Are you sure to delete this card ?</Typography>
+          <Typography>{t("deleteMessage")}</Typography>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCancelDelete}>Cancel</Button>
+          <Button onClick={handleCancelDelete}>{t("cancel")}</Button>
           <Button onClick={handleConfirmDelete} color="error">
-            Delete
+            {t("delete")}
           </Button>
         </DialogActions>
       </Dialog>
