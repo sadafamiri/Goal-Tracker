@@ -35,14 +35,8 @@ export default function Settings() {
         margin: "20px auto",
       }}
     >
-      {/*  Theme Section */}
-      <Paper
-        sx={{
-          p: 3,
-          borderRadius: 3,
-          boxShadow: 3,
-        }}
-      >
+      {/* 🌙 Theme Section */}
+      <Paper sx={{ p: 3, borderRadius: 3, boxShadow: 3 }}>
         <Stack direction="row" alignItems="center" spacing={1} mb={2}>
           {theme === "dark" ? <DarkModeIcon /> : <LightModeIcon />}
           <Typography variant="h5">{t("theme")}</Typography>
@@ -62,13 +56,7 @@ export default function Settings() {
       </Paper>
 
       {/* 🌍 Language Section */}
-      <Paper
-        sx={{
-          p: 3,
-          borderRadius: 3,
-          boxShadow: 3,
-        }}
-      >
+      <Paper sx={{ p: 3, borderRadius: 3, boxShadow: 3 }}>
         <Stack direction="row" alignItems="center" spacing={1} mb={2}>
           <LanguageIcon />
           <Typography variant="h5">{t("language")}</Typography>
@@ -76,18 +64,18 @@ export default function Settings() {
 
         <FormControl fullWidth>
           <InputLabel id="language-select-label">
-            {t("selectLanguage")}
+            {t("language")}
           </InputLabel>
 
           <Select
             labelId="language-select-label"
             value={language}
-            label={t("selectLanguage")}
+            label={t("language")}
             onChange={(e) => changeLanguage(e.target.value)}
           >
             <MenuItem value="en">{t("english")}</MenuItem>
             <MenuItem value="fa">{t("persian")}</MenuItem>
-            <MenuItem value="ps">{t("pashato")}</MenuItem>
+            <MenuItem value="ps">{t("pashto")}</MenuItem>
           </Select>
         </FormControl>
       </Paper>

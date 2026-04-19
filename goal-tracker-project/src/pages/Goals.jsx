@@ -23,14 +23,20 @@ import {
 export default function Goals() {
   const { goals, deleteGoal, addProgress } = useContext(GoalsContext);
   const { t } = useContext(LanguageContext);
-
   const navigate = useNavigate();
-  const [search, setSearch] = useState("");
-  const [filter, setFilter] = useState("All");
 
+  const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState("all");
+
+  // ✅ FILTER FIXED (case + translation safe)
   const filteredGoals = goals.filter((goal) => {
-    const matchCategory = filter === "All" || goal.category === filter;
-    const matchSearch = goal.title.toLowerCase().includes(search.toLowerCase());
+    const matchCategory =
+      filter === "all" || goal.category === filter;
+
+    const matchSearch = goal.title
+      .toLowerCase()
+      .includes(search.toLowerCase());
+
     return matchCategory && matchSearch;
   });
 
@@ -41,6 +47,8 @@ export default function Goals() {
       </Typography>
 
       <Stack direction="row" spacing={3} mb={4} alignItems="center">
+
+        {/* 🔍 SEARCH */}
         <TextField
           label={t("searchGoals")}
           value={search}
@@ -55,6 +63,7 @@ export default function Goals() {
           }}
         />
 
+        {/* 📂 CATEGORY FILTER */}
         <FormControl sx={{ minWidth: 200 }}>
           <InputLabel>{t("category")}</InputLabel>
 
@@ -63,19 +72,26 @@ export default function Goals() {
             label={t("category")}
             onChange={(e) => setFilter(e.target.value)}
           >
-            <MenuItem value="All">{t("all")}</MenuItem>
-            <MenuItem value="Study">Study</MenuItem>
-            <MenuItem value="Work">Work</MenuItem>
-            <MenuItem value="Health">Health</MenuItem>
-            <MenuItem value="Personal">Personal</MenuItem>
+            <MenuItem value="all">{t("all")}</MenuItem>
+
+            {/* ✅ FIXED VALUES (important!) */}
+            <MenuItem value="study">{t("study")}</MenuItem>
+            <MenuItem value="work">{t("work")}</MenuItem>
+            <MenuItem value="health">{t("health")}</MenuItem>
+            <MenuItem value="personal">{t("personal")}</MenuItem>
           </Select>
         </FormControl>
 
-        <Button variant="contained" onClick={() => navigate("/goals/new")}>
+        {/* ➕ NEW GOAL */}
+        <Button
+          variant="contained"
+          onClick={() => navigate("/goals/new")}
+        >
           {t("createGoal")}
         </Button>
       </Stack>
 
+      {/* 📋 GOALS LIST */}
       <Grid container spacing={3}>
         {filteredGoals.map((goal) => (
           <Grid item xs={12} sm={6} md={4} key={goal.id}>
@@ -88,6 +104,9 @@ export default function Goals() {
               onDelete={() => deleteGoal(goal.id)}
               onEdit={() => navigate(`/goals/edit/${goal.id}`)}
               onAddProgress={() => addProgress(goal.id)}
+              onViewDetails={() =>
+                navigate(`/goals/${goal.id}`)
+              }
             />
           </Grid>
         ))}

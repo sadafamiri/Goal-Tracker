@@ -21,6 +21,7 @@ export function LanguageProvider({ children }) {
   const translations = {
     // 🇺🇸 English
     en: {
+      goalTracker: "Goal Tracker",
       dashboard: "Dashboard",
       goals: "Goals",
       categories: "Categories",
@@ -42,14 +43,23 @@ export function LanguageProvider({ children }) {
 
       viewGoals: "View Goals",
       createGoal: "Create New Goal",
-      delete : "DELETE",
-      edit : "EDIT",
+      delete: "DELETE",
+      edit: "EDIT",
+      viewDetails: "viewDetails",
 
       title: "Title",
       category: "Category",
       type: "Type",
       target: "Target",
       create: "Create",
+      all : "all",
+      study: "Study",
+      work: "Work",
+      health: "Health",
+      personal: "Personal",
+      daily: "Daily",
+      count: "Count",
+      time: "Time",
 
       // dashboard
       totalGoals: "Total Goals",
@@ -79,6 +89,7 @@ export function LanguageProvider({ children }) {
 
     // 🇮 Persian
     fa: {
+      goalTracker: "پیگیری اهداف",
       dashboard: "داشبورد",
       archive: "آرشیف",
       goals: "اهداف",
@@ -87,7 +98,7 @@ export function LanguageProvider({ children }) {
 
       theme: "تم",
       currentTheme: "تم فعلی",
-      toggleTheme: "تغییر تم",
+      toggleTheme: "تغییر تم ",
       light: "روشن",
       dark: "تاریک",
 
@@ -102,12 +113,21 @@ export function LanguageProvider({ children }) {
       createGoal: "+ ایجاد هدف جدید",
       delete: "حذف",
       edit: "تغییرات",
+      viewDetails: "دیدن اطلاعات بیشتر",
 
       title: "عنوان",
       category: "دسته‌بندی",
       type: "نوع",
       target: "هدف",
       create: "ایجاد",
+      all: "همه",
+      study: "مطالعه",
+      work: "کار",
+      health: "صحت",
+      personal: "شخصی",
+      daily: "روزانه",
+      count: "تعدادی",
+      time: "زمانی",
 
       totalGoals: "مجموع اهداف",
       completedGoals: "اهداف تکمیل شده",
@@ -134,6 +154,7 @@ export function LanguageProvider({ children }) {
 
     //  Pashto
     ps: {
+      goalTracker: "د موخو څارونکی",
       dashboard: "ډشبورډ",
       archive: "ارشیف",
       goals: "موخې",
@@ -161,6 +182,14 @@ export function LanguageProvider({ children }) {
       type: "ډول",
       target: "هدف",
       create: "جوړ کړئ",
+      all : "تول",
+      study: "مطالعه",
+      work: "کار",
+      health: "روغتیا",
+      personal: "شخصي",
+      daily: "ورځنۍ",
+      count: "شمېر",
+      time: "وخت",
 
       totalGoals: "ټولې موخې",
       completedGoals: "بشپړې شوې موخې",
@@ -177,6 +206,9 @@ export function LanguageProvider({ children }) {
 
       allGoals: "ټولې موخې",
       searchGoals: "موخې ولټوئ...",
+      delete: "ړنګول",
+      edit: "سمول",
+      viewDetails: "جزئیات کتل",
 
       addProgress: "+ پرمختګ",
       deleteGoal: "موخه حذف کړئ",

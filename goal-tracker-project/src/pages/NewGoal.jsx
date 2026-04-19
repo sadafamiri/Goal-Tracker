@@ -19,8 +19,9 @@ export default function NewGoal() {
   const { t } = useContext(LanguageContext);
   const navigate = useNavigate();
 
+  // ✅ IMPORTANT: lowercase values for consistency
   const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("Study");
+  const [category, setCategory] = useState("study");
   const [type, setType] = useState("daily");
   const [target, setTarget] = useState(1);
 
@@ -59,6 +60,7 @@ export default function NewGoal() {
       </Typography>
 
       <form onSubmit={handleSubmit}>
+        {/* TITLE */}
         <TextField
           label={t("title")}
           fullWidth
@@ -68,24 +70,28 @@ export default function NewGoal() {
           margin="normal"
         />
 
+        {/* CATEGORY */}
         <FormControl fullWidth margin="normal">
           <InputLabel>{t("category")}</InputLabel>
           <Select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
+            label={t("category")}
           >
-            <MenuItem value="Study">Study</MenuItem>
-            <MenuItem value="Work">Work</MenuItem>
-            <MenuItem value="Health">Health</MenuItem>
-            <MenuItem value="Personal">Personal</MenuItem>
+            <MenuItem value="study">{t("study")}</MenuItem>
+            <MenuItem value="work">{t("work")}</MenuItem>
+            <MenuItem value="health">{t("health")}</MenuItem>
+            <MenuItem value="personal">{t("personal")}</MenuItem>
           </Select>
         </FormControl>
 
+        {/* TYPE */}
         <FormControl fullWidth margin="normal">
           <InputLabel>{t("type")}</InputLabel>
           <Select
             value={type}
             onChange={(e) => setType(e.target.value)}
+            label={t("type")}
           >
             <MenuItem value="daily">{t("daily")}</MenuItem>
             <MenuItem value="count">{t("count")}</MenuItem>
@@ -93,6 +99,7 @@ export default function NewGoal() {
           </Select>
         </FormControl>
 
+        {/* TARGET */}
         <TextField
           label={t("target")}
           type="number"
@@ -103,12 +110,8 @@ export default function NewGoal() {
           margin="normal"
         />
 
-        <Button
-          type="submit"
-          variant="contained"
-          sx={{ mt: 3 }}
-          fullWidth
-        >
+        {/* BUTTON */}
+        <Button type="submit" variant="contained" sx={{ mt: 3 }} fullWidth>
           {t("create")}
         </Button>
       </form>

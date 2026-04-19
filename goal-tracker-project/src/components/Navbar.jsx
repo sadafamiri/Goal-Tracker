@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
+
 import { LanguageContext } from "../context/LanguageContext";
 import { ThemeContext } from "../context/ThemeContext";
 import { SearchContext } from "../context/SearchContext";
@@ -19,6 +20,10 @@ import {
   InputBase,
   Stack,
   useTheme,
+  Divider,
+  FormControl,
+  Select,
+  MenuItem,
 } from "@mui/material";
 
 import MenuIcon from "@mui/icons-material/Menu";
@@ -27,7 +32,7 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import SearchIcon from "@mui/icons-material/Search";
 
 export default function Navbar() {
-  const { t } = useContext(LanguageContext);
+  const { t, language, changeLanguage } = useContext(LanguageContext);
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { search, setSearch } = useContext(SearchContext);
   const muiTheme = useTheme();
@@ -44,20 +49,6 @@ export default function Navbar() {
 
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
 
-  const drawer = (
-    <Box sx={{ width: 250 }} onClick={handleDrawerToggle}>
-      <List>
-        {links.map((link) => (
-          <ListItem key={link.path} disablePadding>
-            <ListItemButton component={NavLink} to={link.path}>
-              <ListItemText primary={link.label} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  );
-
   return (
     <>
       <AppBar
@@ -70,28 +61,22 @@ export default function Navbar() {
           color: theme === "dark" ? muiTheme.palette.text.primary : "#fff",
         }}
       >
-        <Toolbar sx={{ justifyContent: "space-between", flexWrap: "wrap" }}>
-
-          {/* 🔹 Left: Menu + Title */}
-          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <IconButton
               color="inherit"
-              edge="start"
               onClick={handleDrawerToggle}
               sx={{ display: { sm: "none" } }}
             >
               <MenuIcon />
             </IconButton>
 
-            <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-              {t("dashboard")}
-            </Typography>
+            <Typography variant="h6">{t("Goal Tracker")}</Typography>
           </Box>
 
-          {/* 🔹 Center: Search */}
           <Box
             sx={{
-              display: "flex",
+              display: { xs: "none", sm: "flex" },
               alignItems: "center",
               gap: 1,
               px: 1,
@@ -112,7 +97,6 @@ export default function Navbar() {
             />
           </Box>
 
-          {/* 🔹 Right: Links + Theme */}
           <Box
             sx={{
               display: { xs: "none", sm: "flex" },
@@ -126,42 +110,58 @@ export default function Navbar() {
                   key={link.path}
                   component={NavLink}
                   to={link.path}
-                  sx={{
-                    color:
-                      theme === "dark"
-                        ? muiTheme.palette.text.primary
-                        : "#fff",
-                    textTransform: "none",
-                  }}
-                  style={({ isActive }) => ({
-                    fontWeight: isActive ? "bold" : "normal",
-                    borderBottom: isActive
-                      ? `2px solid ${muiTheme.palette.secondary.main}`
-                      : "none",
-                  })}
+                  sx={{ color: "inherit", textTransform: "none" }}
                 >
                   {link.label}
                 </Button>
               ))}
             </Stack>
 
-            {/* 🌙 Theme Toggle */}
+            {/* Theme */}
             <IconButton color="inherit" onClick={toggleTheme}>
               {theme === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
             </IconButton>
           </Box>
-
         </Toolbar>
       </AppBar>
 
-      {/* 📱 Mobile Drawer */}
-      <Drawer
-        anchor="left"
-        open={mobileOpen}
-        onClose={handleDrawerToggle}
-        ModalProps={{ keepMounted: true }}
-      >
-        {drawer}
+      <Drawer open={mobileOpen} onClose={handleDrawerToggle}>
+        <Box sx={{ width: 260, p: 2 }}>
+          {/* Theme */}
+          <Button
+            fullWidth
+            variant="contained"
+            onClick={toggleTheme}
+            startIcon={theme === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
+          >
+            {t("theme")}
+          </Button>
+
+          {/* Language */}
+          <FormControl fullWidth sx={{ mt: 2 }}>
+            <Select
+              value={language}
+              onChange={(e) => changeLanguage(e.target.value)}
+            >
+              <MenuItem value="en">{t("english")}</MenuItem>
+              <MenuItem value="fa">{t("persian")}</MenuItem>
+              <MenuItem value="ps">{t("pashto")}</MenuItem>
+            </Select>
+          </FormControl>
+
+          <Divider sx={{ my: 2 }} />
+
+          {/* Links */}
+          <List>
+            {links.map((link) => (
+              <ListItem key={link.path} disablePadding>
+                <ListItemButton component={NavLink} to={link.path}>
+                  <ListItemText primary={link.label} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+        </Box>
       </Drawer>
     </>
   );
