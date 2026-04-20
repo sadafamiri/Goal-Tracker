@@ -71,7 +71,7 @@ export default function Navbar() {
               <MenuIcon />
             </IconButton>
 
-            <Typography variant="h6">{t("Goal Tracker")}</Typography>
+            <Typography variant="h6">{t("goalTracker")}</Typography>
           </Box>
 
           <Box

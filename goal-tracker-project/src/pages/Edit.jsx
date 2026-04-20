@@ -1,14 +1,16 @@
-// src/pages/EditGoal.jsx
 import React, { useContext, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { GoalsContext } from "../context/GoalsContext";
+import { LanguageContext } from "../context/LanguageContext";
 
 import { Box, Typography, TextField, Button, Stack } from "@mui/material";
 
 export default function Edit() {
   const { id } = useParams();
   const navigate = useNavigate();
+
   const { goals, updateGoal } = useContext(GoalsContext);
+  const { t } = useContext(LanguageContext); // ✅ مهم
 
   const goal = goals.find((g) => g.id === Number(id));
 
@@ -25,7 +27,7 @@ export default function Edit() {
   }, [goal]);
 
   if (!goal) {
-    return <Typography>Goal not found</Typography>;
+    return <Typography>{t("goalNotFound")}</Typography>;
   }
 
   const handleSubmit = () => {
@@ -42,35 +44,35 @@ export default function Edit() {
   return (
     <Box sx={{ p: 4 }}>
       <Typography variant="h4" mb={3}>
-        Edit Goal
+        {t("editGoal")}
       </Typography>
 
       <Stack spacing={3} maxWidth={400}>
         <TextField
-          label="Title"
+          label={t("title")}
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
 
         <TextField
-          label="Category"
+          label={t("category")}
           value={category}
           onChange={(e) => setCategory(e.target.value)}
         />
 
         <TextField
-          label="Target"
+          label={t("target")}
           type="number"
           value={target}
           onChange={(e) => setTarget(e.target.value)}
         />
 
         <Button variant="contained" onClick={handleSubmit}>
-          Save Changes
+          {t("saveChanges")}
         </Button>
 
         <Button variant="outlined" onClick={() => navigate(-1)}>
-          Cancel
+          {t("cancel")}
         </Button>
       </Stack>
     </Box>

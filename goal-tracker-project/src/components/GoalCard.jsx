@@ -11,6 +11,9 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  onPause,
+  onResume,
+  status,
 } from "@mui/material";
 
 import { LanguageContext } from "../context/LanguageContext";
@@ -68,6 +71,18 @@ export default function GoalCard({
             {onEdit && (
               <Button variant="outlined" onClick={onEdit}>
                 ✏️ {t("edit")}
+              </Button>
+            )}
+
+            {status === "active" && (
+              <Button variant="outlined" onClick={onPause}>
+                Pause
+              </Button>
+            )}
+
+            {status === "paused" && (
+              <Button variant="contained" onClick={onResume}>
+                Resume
               </Button>
             )}
 

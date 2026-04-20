@@ -52,6 +52,22 @@ export function GoalsProvider({ children }) {
     );
   };
 
+  const pauseGoal = (id) => {
+    setGoals((prev) =>
+      prev.map((goal) =>
+        goal.id === id ? { ...goal, status: "paused" } : goal,
+      ),
+    );
+  };
+
+  const resumeGoal = (id) => {
+    setGoals((prev) =>
+      prev.map((goal) =>
+        goal.id === id ? { ...goal, status: "active" } : goal,
+      ),
+    );
+  };
+
   // Add Progress
   const addProgress = (id) => {
     const today = new Date().toDateString();
@@ -110,6 +126,8 @@ export function GoalsProvider({ children }) {
       deleteGoal,
       updateGoal,
       addProgress,
+      pauseGoal,
+      resumeGoal,
       xp,
       streak,
     }),

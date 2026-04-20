@@ -52,7 +52,7 @@ export function LanguageProvider({ children }) {
       type: "Type",
       target: "Target",
       create: "Create",
-      all : "all",
+      all: "all",
       study: "Study",
       work: "Work",
       health: "Health",
@@ -85,6 +85,12 @@ export function LanguageProvider({ children }) {
       back: "Back",
       activityHistory: "Activity History",
       noActivity: "No activity yet",
+
+      //Edit page
+      editdGoal: "Edit Goal",
+      saveChanges: "Save Changes",
+      cancel: "Cancel",
+      goalNotFound: "Goal not found",
     },
 
     // 🇮 Persian
@@ -150,6 +156,13 @@ export function LanguageProvider({ children }) {
       back: "برگشت",
       activityHistory: "تاریخچه فعالیت",
       noActivity: "هنوز فعالیتی وجود ندارد",
+
+      // Edit page
+
+      editGoal: "تغییرات هدف",
+      saveChanges: "ذخیره تغییرات",
+      cancel: "لغو",
+      goalNotFound: "هدف پیدا نشد",
     },
 
     //  Pashto
@@ -182,7 +195,7 @@ export function LanguageProvider({ children }) {
       type: "ډول",
       target: "هدف",
       create: "جوړ کړئ",
-      all : "تول",
+      all: "تول",
       study: "مطالعه",
       work: "کار",
       health: "روغتیا",
@@ -215,6 +228,13 @@ export function LanguageProvider({ children }) {
       back: "شاته",
       activityHistory: "فعالیت تاریخ",
       noActivity: "هیڅ فعالیت نشته",
+
+      // Edit page
+
+      editGoal: "موخه سمول",
+      saveChanges: "بدلونونه خوندي کړئ",
+      cancel: "لغوه",
+      goalNotFound: "موخه ونه موندل شوه",
     },
   };
 

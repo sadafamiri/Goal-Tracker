@@ -21,21 +21,20 @@ import {
 } from "@mui/material";
 
 export default function Goals() {
-  const { goals, deleteGoal, addProgress } = useContext(GoalsContext);
+  const { goals, deleteGoal, addProgress, pauseGoal, resumeGoal } =
+    useContext(GoalsContext);
   const { t } = useContext(LanguageContext);
   const navigate = useNavigate();
 
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all");
 
-  // ✅ FILTER FIXED (case + translation safe)
+  // ✅ FIXED FILTER
   const filteredGoals = goals.filter((goal) => {
     const matchCategory =
-      filter === "all" || goal.category === filter;
+      filter === "all" || goal.category.toLowerCase() === filter;
 
-    const matchSearch = goal.title
-      .toLowerCase()
-      .includes(search.toLowerCase());
+    const matchSearch = goal.title.toLowerCase().includes(search.toLowerCase());
 
     return matchCategory && matchSearch;
   });
@@ -47,7 +46,6 @@ export default function Goals() {
       </Typography>
 
       <Stack direction="row" spacing={3} mb={4} alignItems="center">
-
         {/* 🔍 SEARCH */}
         <TextField
           label={t("searchGoals")}
@@ -73,8 +71,6 @@ export default function Goals() {
             onChange={(e) => setFilter(e.target.value)}
           >
             <MenuItem value="all">{t("all")}</MenuItem>
-
-            {/* ✅ FIXED VALUES (important!) */}
             <MenuItem value="study">{t("study")}</MenuItem>
             <MenuItem value="work">{t("work")}</MenuItem>
             <MenuItem value="health">{t("health")}</MenuItem>
@@ -83,10 +79,7 @@ export default function Goals() {
         </FormControl>
 
         {/* ➕ NEW GOAL */}
-        <Button
-          variant="contained"
-          onClick={() => navigate("/goals/new")}
-        >
+        <Button variant="contained" onClick={() => navigate("/goals/new")}>
           {t("createGoal")}
         </Button>
       </Stack>
@@ -101,12 +94,12 @@ export default function Goals() {
               progress={goal.progress}
               target={goal.target}
               category={goal.category}
+              status={goal.status}
               onDelete={() => deleteGoal(goal.id)}
               onEdit={() => navigate(`/goals/edit/${goal.id}`)}
               onAddProgress={() => addProgress(goal.id)}
-              onViewDetails={() =>
-                navigate(`/goals/${goal.id}`)
-              }
+              onPause={() => pauseGoal(goal.id)}
+              onResume={() => resumeGoal(goal.id)}
             />
           </Grid>
         ))}
