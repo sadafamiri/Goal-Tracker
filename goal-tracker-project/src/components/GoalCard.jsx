@@ -11,9 +11,7 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-  onPause,
-  onResume,
-  status,
+  
 } from "@mui/material";
 
 import { LanguageContext } from "../context/LanguageContext";
@@ -27,6 +25,9 @@ export default function GoalCard({
   onAddProgress,
   onViewDetails,
   onEdit,
+  onPause,
+  onResume,
+  status,
 }) {
   const { t } = useContext(LanguageContext);
 
