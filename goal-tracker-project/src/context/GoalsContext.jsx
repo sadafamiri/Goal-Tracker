@@ -6,13 +6,40 @@ export const GoalsContext = createContext(null);
 const STORAGE_KEY = "goals";
 
 export function GoalsProvider({ children }) {
+  const normalizeGoal = (goal) => {
+    const nextGoal = { ...goal };
+
+    if (!nextGoal.status) {
+      nextGoal.status =
+        Number(nextGoal.progress) >= Number(nextGoal.target)
+          ? "completed"
+          : "active";
+    }
+
+    if (!Array.isArray(nextGoal.logs)) {
+      nextGoal.logs = [];
+    }
+
+    if (nextGoal.status === "completed" && !nextGoal.completedAt) {
+      const lastLog = nextGoal.logs.length
+        ? nextGoal.logs[nextGoal.logs.length - 1]
+        : null;
+      nextGoal.completedAt = lastLog?.date || nextGoal.createdAt || null;
+    }
+
+    return nextGoal;
+  };
+
   // Goals state
   const [goals, setGoals] = useState(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
-      return saved ? JSON.parse(saved) : DataGoal;
+      if (saved) {
+        return JSON.parse(saved).map(normalizeGoal);
+      }
+      return DataGoal.map(normalizeGoal);
     } catch {
-      return DataGoal;
+      return DataGoal.map(normalizeGoal);
     }
   });
 
@@ -37,7 +64,7 @@ export function GoalsProvider({ children }) {
 
   //  Add Goal
   const addGoal = (goal) => {
-    setGoals((prev) => [...prev, { ...goal, id: Date.now() }]);
+    setGoals((prev) => [...prev, normalizeGoal({ ...goal, id: Date.now() })]);
   };
 
   //  Delete Goal
@@ -48,7 +75,9 @@ export function GoalsProvider({ children }) {
   //  Update Goal
   const updateGoal = (id, updatedGoal) => {
     setGoals((prev) =>
-      prev.map((goal) => (goal.id === id ? updatedGoal : goal)),
+      prev.map((goal) =>
+        goal.id === id ? normalizeGoal({ ...updatedGoal, id }) : goal,
+      ),
     );
   };
 
@@ -112,6 +141,8 @@ export function GoalsProvider({ children }) {
         progress: newProgress > goal.target ? goal.target : newProgress,
         logs: [...(goal.logs || []), newLog],
         status: newProgress >= goal.target ? "completed" : "active",
+        completedAt:
+          newProgress >= goal.target ? goal.completedAt || newLog.date : null,
       };
     });
 

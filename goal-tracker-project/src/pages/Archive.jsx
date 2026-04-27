@@ -7,10 +7,26 @@ import { useNavigate } from "react-router-dom";
 
 export default function Archive() {
   const { goals, deleteGoal, restoreGoal } = useContext(GoalsContext);
-  const { t } = useContext(LanguageContext);
+  const { t, language } = useContext(LanguageContext);
   const navigate = useNavigate();
 
   const completedGoals = goals.filter((goal) => goal.status === "completed");
+
+  const formatCompletedDate = (dateString) => {
+    if (!dateString) return "-";
+
+    const date = new Date(dateString);
+    if (Number.isNaN(date.getTime())) return "-";
+
+    const locale = language === "fa" ? "fa-IR" : language === "ps" ? "ps-AF" : "en-US";
+    return date.toLocaleString(locale, {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
 
   return (
     <Box sx={{ p: 4 }}>
@@ -29,6 +45,7 @@ export default function Archive() {
                 progress={goal.progress}
                 target={goal.target}
                 category={goal.category}
+                completedInfo={`${t("completedOn")}: ${formatCompletedDate(goal.completedAt)}`}
                 onDelete={() => deleteGoal(goal.id)}
 
                 //  Edit

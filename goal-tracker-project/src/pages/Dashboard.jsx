@@ -17,7 +17,7 @@ import {
 import { useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
-  const { goals, deleteGoal, addProgress, xp, streak } =
+  const { goals, deleteGoal, addProgress, pauseGoal, resumeGoal, xp, streak } =
     useContext(GoalsContext);
 
   const { t } = useContext(LanguageContext);
@@ -27,7 +27,9 @@ export default function Dashboard() {
 
   const completedGoals = goals.filter((g) => g.progress >= g.target).length;
 
-  const activeGoals = goals.filter((g) => g.status === "active");
+  const activeGoals = goals.filter(
+    (g) => g.status === "active" || g.status === "paused",
+  );
 
   const completedList = goals.filter((g) => g.status === "completed");
 
@@ -116,8 +118,11 @@ export default function Dashboard() {
                 progress={goal.progress}
                 target={goal.target}
                 category={goal.category}
+                status={goal.status}
                 onDelete={() => deleteGoal(goal.id)}
                 onAddProgress={() => addProgress(goal.id)}
+                onPause={() => pauseGoal(goal.id)}
+                onResume={() => resumeGoal(goal.id)}
                 onViewDetails={() => navigate(`/goals/${goal.id}`)}
                 onEdit={() => navigate(`/goals/edit/${goal.id}`)}
               />

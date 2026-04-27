@@ -28,6 +28,7 @@ export default function GoalCard({
   onPause,
   onResume,
   status,
+  completedInfo,
 }) {
   const { t } = useContext(LanguageContext);
 
@@ -50,6 +51,12 @@ export default function GoalCard({
           <Typography variant="body2" color="text.secondary">
             {t("category")}: {category}
           </Typography>
+
+          {completedInfo && (
+            <Typography variant="body2" color="success.main" sx={{ mt: 0.5 }}>
+              {completedInfo}
+            </Typography>
+          )}
 
           <Box sx={{ my: 1 }}>
             <LinearProgress
@@ -75,13 +82,13 @@ export default function GoalCard({
               </Button>
             )}
 
-            {status === "active" && (
+            {status === "active" && onPause && (
               <Button variant="outlined" onClick={onPause}>
                 Pause
               </Button>
             )}
 
-            {status === "paused" && (
+            {status === "paused" && onResume && (
               <Button variant="contained" onClick={onResume}>
                 Resume
               </Button>

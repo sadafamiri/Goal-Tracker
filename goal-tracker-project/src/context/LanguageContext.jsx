@@ -40,6 +40,7 @@ export function LanguageProvider({ children }) {
       pashto: "Pashto",
 
       noCompleted: "No completed goals yet",
+      completedOn: "Completed on",
 
       viewGoals: "View Goals",
       createGoal: "Create New Goal",
@@ -114,6 +115,7 @@ export function LanguageProvider({ children }) {
       pashto: "پشتو",
 
       noCompleted: "هنوز هدفی تکمیل نشده",
+      completedOn: "تاریخ تکمیل",
 
       viewGoals: "مشاهده اهداف",
       createGoal: "+ ایجاد هدف جدید",
@@ -186,6 +188,7 @@ export function LanguageProvider({ children }) {
       pashto: "پښتو",
 
       noCompleted: "تر اوسه هېڅ موخه نه ده بشپړه شوې",
+      completedOn: "د بشپړېدو نېټه",
 
       viewGoals: "موخې وګورئ",
       createGoal: "+ نوې موخه جوړ کړئ",
