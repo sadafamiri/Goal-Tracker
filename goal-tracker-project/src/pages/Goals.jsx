@@ -29,7 +29,7 @@ export default function Goals() {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all");
 
-  // ✅ FIXED FILTER
+  //  FIXED FILTER
   const filteredGoals = goals.filter((goal) => {
     const matchCategory =
       filter === "all" || goal.category.toLowerCase() === filter;
@@ -61,7 +61,7 @@ export default function Goals() {
           }}
         />
 
-        {/* 📂 CATEGORY FILTER */}
+        {/* CATEGORY FILTER */}
         <FormControl sx={{ minWidth: 200 }}>
           <InputLabel>{t("category")}</InputLabel>
 
@@ -78,13 +78,13 @@ export default function Goals() {
           </Select>
         </FormControl>
 
-        {/* ➕ NEW GOAL */}
+        {/*  NEW GOAL */}
         <Button variant="contained" onClick={() => navigate("/goals/new")}>
           {t("createGoal")}
         </Button>
       </Stack>
 
-      {/* 📋 GOALS LIST */}
+      {/*  GOALS LIST */}
       <Grid container spacing={3}>
         {filteredGoals.map((goal) => (
           <Grid item xs={12} sm={6} md={4} key={goal.id}>

@@ -3,13 +3,7 @@ import { GoalsContext } from "../context/GoalsContext";
 import { useNavigate } from "react-router-dom";
 import { LanguageContext } from "../context/LanguageContext";
 
-import {
-  Box,
-  Typography,
-  Grid,
-  Paper,
-  Button
-} from "@mui/material";
+import { Box, Typography, Grid, Paper, Button } from "@mui/material";
 
 export default function Categories() {
   const { goals } = useContext(GoalsContext);
@@ -27,7 +21,7 @@ export default function Categories() {
       <Grid container spacing={3}>
         {categories.map((category, index) => {
           const categoryGoals = goals.filter(
-            (goal) => goal.category === category
+            (goal) => goal.category === category,
           );
 
           return (
@@ -39,7 +33,7 @@ export default function Categories() {
                   borderRadius: 3,
                   textAlign: "center",
                   transition: "0.3s",
-                  "&:hover": { transform: "scale(1.03)" }
+                  "&:hover": { transform: "scale(1.03)" },
                 }}
               >
                 <Typography variant="h5" mb={1}>
@@ -50,10 +44,7 @@ export default function Categories() {
                   {categoryGoals.length} {t("goals")}
                 </Typography>
 
-                <Button
-                  variant="contained"
-                  onClick={() => navigate("/goals")}
-                >
+                <Button variant="contained" onClick={() => navigate("/goals")}>
                   {t("viewGoals")}
                 </Button>
               </Paper>

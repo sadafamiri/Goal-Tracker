@@ -19,25 +19,25 @@ import Archive from "./pages/Archive";
 function App() {
   return (
     <SearchProvider>
-    <ThemeProvider>
-      <LanguageProvider>
-        <GoalsProvider>
-          <Routes>
-            <Route element={<Layout />}>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/archive" element={<Archive />} />
-              <Route path="/goals" element={<Goals />} />
-              <Route path="/goals/new" element={<NewGoal />} />
-              <Route path="/goals/:id" element={<GoalDetails />} />
-              <Route path="/categories" element={<Categories />} />
-              <Route path="/settings" element={<Settings />} />
-              <Route path="/goals/edit/:id" element={<Edit/>} />
-              <Route path="*" element={<NotFound />} />
-            </Route>
-          </Routes>
-        </GoalsProvider>
-      </LanguageProvider>
-    </ThemeProvider>
+      <ThemeProvider>
+        <LanguageProvider>
+          <GoalsProvider>
+            <Routes>
+              <Route element={<Layout />}>
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/archive" element={<Archive />} />
+                <Route path="/goals" element={<Goals />} />
+                <Route path="/goals/new" element={<NewGoal />} />
+                <Route path="/goals/:id" element={<GoalDetails />} />
+                <Route path="/categories" element={<Categories />} />
+                <Route path="/settings" element={<Settings />} />
+                <Route path="/goals/edit/:id" element={<Edit />} />
+                <Route path="*" element={<NotFound />} />
+              </Route>
+            </Routes>
+          </GoalsProvider>
+        </LanguageProvider>
+      </ThemeProvider>
     </SearchProvider>
   );
 }

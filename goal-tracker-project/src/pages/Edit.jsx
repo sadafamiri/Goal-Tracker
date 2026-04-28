@@ -10,7 +10,7 @@ export default function Edit() {
   const navigate = useNavigate();
 
   const { goals, updateGoal } = useContext(GoalsContext);
-  const { t } = useContext(LanguageContext); // ✅ مهم
+  const { t } = useContext(LanguageContext);
 
   const goal = goals.find((g) => g.id === Number(id));
 

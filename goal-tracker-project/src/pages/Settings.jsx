@@ -35,7 +35,7 @@ export default function Settings() {
         margin: "20px auto",
       }}
     >
-      {/* 🌙 Theme Section */}
+      {/*  Theme Section */}
       <Paper sx={{ p: 3, borderRadius: 3, boxShadow: 3 }}>
         <Stack direction="row" alignItems="center" spacing={1} mb={2}>
           {theme === "dark" ? <DarkModeIcon /> : <LightModeIcon />}
@@ -55,7 +55,7 @@ export default function Settings() {
         </Button>
       </Paper>
 
-      {/* 🌍 Language Section */}
+      {/*  Language Section */}
       <Paper sx={{ p: 3, borderRadius: 3, boxShadow: 3 }}>
         <Stack direction="row" alignItems="center" spacing={1} mb={2}>
           <LanguageIcon />
@@ -63,9 +63,7 @@ export default function Settings() {
         </Stack>
 
         <FormControl fullWidth>
-          <InputLabel id="language-select-label">
-            {t("language")}
-          </InputLabel>
+          <InputLabel id="language-select-label">{t("language")}</InputLabel>
 
           <Select
             labelId="language-select-label"

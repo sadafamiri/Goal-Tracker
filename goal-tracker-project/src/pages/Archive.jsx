@@ -18,7 +18,8 @@ export default function Archive() {
     const date = new Date(dateString);
     if (Number.isNaN(date.getTime())) return "-";
 
-    const locale = language === "fa" ? "fa-IR" : language === "ps" ? "ps-AF" : "en-US";
+    const locale =
+      language === "fa" ? "fa-IR" : language === "ps" ? "ps-AF" : "en-US";
     return date.toLocaleString(locale, {
       year: "numeric",
       month: "long",
@@ -47,13 +48,10 @@ export default function Archive() {
                 category={goal.category}
                 completedInfo={`${t("completedOn")}: ${formatCompletedDate(goal.completedAt)}`}
                 onDelete={() => deleteGoal(goal.id)}
-
                 //  Edit
                 onEdit={() => navigate(`/goals/edit/${goal.id}`)}
-
                 //  Details
                 onViewDetails={() => navigate(`/goals/${goal.id}`)}
-
               />
             </Grid>
           ))}

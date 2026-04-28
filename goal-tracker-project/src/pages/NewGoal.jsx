@@ -19,7 +19,7 @@ export default function NewGoal() {
   const { t } = useContext(LanguageContext);
   const navigate = useNavigate();
 
-  // ✅ IMPORTANT: lowercase values for consistency
+  //  IMPORTANT: lowercase values for consistency
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("study");
   const [type, setType] = useState("daily");

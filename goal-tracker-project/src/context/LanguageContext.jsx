@@ -21,19 +21,19 @@ export function LanguageProvider({ children }) {
   const translations = {
     // 🇺🇸 English
     en: {
+      //navbar
       goalTracker: "Goal Tracker",
       dashboard: "Dashboard",
       goals: "Goals",
       categories: "Categories",
       settings: "Settings",
       archive: "Archive",
-
+      //settings
       theme: "Theme",
       currentTheme: "Current Theme",
       toggleTheme: "Toggle Theme",
       light: "Light",
       dark: "Dark",
-
       language: "Language",
       english: "English",
       persian: "Persian",
@@ -41,12 +41,14 @@ export function LanguageProvider({ children }) {
 
       noCompleted: "No completed goals yet",
       completedOn: "Completed on",
-
+      // goal card
       viewGoals: "View Goals",
       createGoal: "Create New Goal",
       delete: "DELETE",
       edit: "EDIT",
       viewDetails: "viewDetails",
+      resume :"Resume",
+      pause : "pause",
 
       title: "Title",
       category: "Category",
@@ -96,19 +98,19 @@ export function LanguageProvider({ children }) {
 
     // 🇮 Persian
     fa: {
+      //navbar
       goalTracker: "پیگیری اهداف",
       dashboard: "داشبورد",
       archive: "آرشیف",
       goals: "اهداف",
       categories: "دسته‌بندی‌ها",
       settings: "تنظیمات",
-
+      //settings
       theme: "تم",
       currentTheme: "تم فعلی",
       toggleTheme: "تغییر تم ",
       light: "روشن",
       dark: "تاریک",
-
       language: "زبان",
       english: "انگلیسی",
       persian: "فارسی",
@@ -122,7 +124,9 @@ export function LanguageProvider({ children }) {
       delete: "حذف",
       edit: "تغییرات",
       viewDetails: "دیدن اطلاعات بیشتر",
-
+      pause: "متوقف",
+      resume: " دامه دادن",
+      
       title: "عنوان",
       category: "دسته‌بندی",
       type: "نوع",
@@ -136,7 +140,7 @@ export function LanguageProvider({ children }) {
       daily: "روزانه",
       count: "تعدادی",
       time: "زمانی",
-
+      // dashboard
       totalGoals: "مجموع اهداف",
       completedGoals: "اهداف تکمیل شده",
       progress: "پیشرفت",
@@ -149,10 +153,10 @@ export function LanguageProvider({ children }) {
       xp: "امتیاز",
       streak: "استریک",
       days: "روز",
-
+      // goals page
       allGoals: "همه اهداف",
       searchGoals: "جستجوی هدف...",
-
+      // details
       addProgress: "+ پیشرفت",
       deleteGoal: "حذف هدف",
       back: "برگشت",
@@ -169,19 +173,19 @@ export function LanguageProvider({ children }) {
 
     //  Pashto
     ps: {
+      //navbar
       goalTracker: "د موخو څارونکی",
       dashboard: "ډشبورډ",
       archive: "ارشیف",
       goals: "موخې",
       categories: "کتګورۍ",
       settings: "تنظیمات",
-
+      //settings
       theme: "بڼه",
       currentTheme: "اوسنی بڼه",
       toggleTheme: "بڼه بدلول",
       light: "روښانه",
       dark: "تیاره",
-
       language: "ژبه",
       english: "انګلیسي",
       persian: "فارسي",
@@ -189,7 +193,7 @@ export function LanguageProvider({ children }) {
 
       noCompleted: "تر اوسه هېڅ موخه نه ده بشپړه شوې",
       completedOn: "د بشپړېدو نېټه",
-
+      // goals page
       viewGoals: "موخې وګورئ",
       createGoal: "+ نوې موخه جوړ کړئ",
 
@@ -206,7 +210,7 @@ export function LanguageProvider({ children }) {
       daily: "ورځنۍ",
       count: "شمېر",
       time: "وخت",
-
+      // dashboard
       totalGoals: "ټولې موخې",
       completedGoals: "بشپړې شوې موخې",
       progress: "پرمختګ",
@@ -225,7 +229,9 @@ export function LanguageProvider({ children }) {
       delete: "ړنګول",
       edit: "سمول",
       viewDetails: "جزئیات کتل",
-
+      pause: "درول",
+      resume: " بیا پیل",
+      // details
       addProgress: "+ پرمختګ",
       deleteGoal: "موخه حذف کړئ",
       back: "شاته",
